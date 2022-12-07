@@ -1,29 +1,63 @@
-<template>
-  <div class="w-full h-fit flex flex-col">
-    <h1 class="text-start text-sm">{{ Label }}</h1>
-    <input
-      class="focus:border-primary focus:outline-none transition focus:shadow-md duration-300 mt-1 block h-10 w-full rounded-md border-2 border-gray-200 px-2 sm:text-sm"
-      @input="$emit('onChange', { value, key: Label })"
-      :type="Type ? Type : 'text'"
-      :placeholder="PlaceHolder"
-      v-model="value"
-    />
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref } from "vue";
-const value = ref<string>();
-defineProps({
-  Label: {
+const props = defineProps({
+  Placeholder: {
     type: String,
-    required: true,
+    required: false,
   },
   Type: {
     type: String,
+    required: false,
+    default: "text",
   },
-  PlaceHolder: {
+  Value: {
     type: String,
+    required: false,
+  },
+  Disabled: {
+    type: Boolean,
+    required: false,
+  },
+  FocusClass: {
+    type: String,
+    required: false,
+    default: "",
+  },
+  DisabledClass: {
+    type: String,
+    required: false,
+    default: "",
+  },
+  MoreClass: {
+    type: String,
+    required: false,
+    default: "",
   },
 });
+
+const inputValue = ref<string>(!props.Value ? "" : props.Value);
+
+watch(
+  () => props.Value,
+  (newShorteLink) => {
+    if (newShorteLink) {
+      inputValue.value = newShorteLink;
+    }
+  }
+);
 </script>
+
+<template>
+  <input
+    @input="$emit('onChange', inputValue)"
+    v-model="inputValue"
+    :class="[
+      'w-full h-fit text-black/90 px-3 py-2 rounded-sm border-2 border-gray-300 transition-all duration-200',
+      DisabledClass,
+      FocusClass,
+      MoreClass,
+    ]"
+    :disabled="Disabled"
+    :type="Type"
+    :placeholder="Placeholder"
+  />
+</template>
