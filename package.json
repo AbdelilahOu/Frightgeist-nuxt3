@@ -13,6 +13,10 @@
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.1.2",
-    "@prisma/client": "^4.6.1"
+    "@prisma/client": "^4.6.1",
+    "@trpc/client": "^10.4.3",
+    "@trpc/server": "^10.4.3",
+    "trpc-nuxt": "^0.4.3",
+    "zod": "^3.19.1"
   }
 }
