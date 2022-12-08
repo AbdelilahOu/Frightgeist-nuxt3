@@ -1,5 +1,5 @@
 import { httpBatchLink, createTRPCProxyClient } from "@trpc/client";
-import type { AppRouter } from "@/server/trpc/routers";
+import { AppRouter } from "../server/trpc/routers";
 
 export default defineNuxtPlugin(() => {
   const client = createTRPCProxyClient<AppRouter>({
