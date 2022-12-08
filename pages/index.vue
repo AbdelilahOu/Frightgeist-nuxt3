@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { $client } = useNuxtApp();
+
 definePageMeta({
   middleware: ["auth"],
 });
