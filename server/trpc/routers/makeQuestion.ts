@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { router, procedure } from "../trpc";
+import { router, procedure } from "../../utils/trpc";
 
 export const questionRouter = router({
   question: procedure
@@ -10,7 +10,7 @@ export const questionRouter = router({
     )
     .query(({ input }) => {
       return {
-        greeting: `hello ${input.text}`,
+        greeting: `hello`,
       };
     }),
 });
