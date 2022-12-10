@@ -8,15 +8,15 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/jsonwebtoken": "^8.5.9",
+    "bcrypt": "^5.1.0",
+    "jsonwebtoken": "^8.5.1",
     "nuxt": "3.0.0-rc.12",
     "prisma": "^4.6.1"
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.1.2",
-    "@prisma/client": "^4.6.1",
-    "@trpc/client": "^10.4.3",
-    "@trpc/server": "^10.4.3",
-    "trpc-nuxt": "^0.4.3",
-    "zod": "^3.19.1"
+    "@prisma/client": "^4.6.1"
   }
 }

@@ -6,5 +6,7 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
-  runtimeConfig: {},
+  runtimeConfig: {
+    jwt_se: "mhsdfjmhdsmofuhfbmkjxbcnnap",
+  },
 });
