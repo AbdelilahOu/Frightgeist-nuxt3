@@ -44,10 +44,6 @@ watch(
         : 'text-gray-300 grid transition-all  transform duration-200 grid-cols-[0px_1fr]',
     ]"
   >
-    <span
-      class="w-full text-lg overflow-hidden h-full flex items-center justify-center font-semibold"
-      >⚠</span
-    >
     <input
       @input="$emit('onChange', inputValue)"
       v-model="inputValue"

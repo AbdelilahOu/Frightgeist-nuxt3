@@ -36,11 +36,12 @@ const areFeildsEmpty = (): boolean => {
   return false;
 };
 // return to initiale
-const updateVisualAlert = () => {
+const updateVisualAlert = (): Promise<void> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       IsUserName.value = false;
       IsPassWord.value = false;
+      resolve();
     }, 2000);
   });
 };
