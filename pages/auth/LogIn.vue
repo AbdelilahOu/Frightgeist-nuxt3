@@ -1,3 +1,51 @@
+<script setup lang="ts">
+// feilds
+const userName = ref<string>("");
+const passWord = ref<string>("");
+// for ui alert
+const IsUserName = ref<boolean>(false);
+const IsPassWord = ref<boolean>(false);
+// update feilds
+const updateUserName = (name: string) => (userName.value = name);
+const updatePassWord = (word: string) => (passWord.value = word);
+// main action
+const logIn = async (): Promise<void> => {
+  if (!areFeildsEmpty()) {
+    const { data } = await useFetch("/api/login", {
+      method: "POST",
+      body: {
+        userName: userName.value,
+        passWord: passWord.value,
+      },
+    });
+    navigateTo("/");
+    return;
+  }
+  IsUserName.value = userName.value === "";
+  IsPassWord.value = passWord.value === "";
+  await updateVisualAlert();
+};
+// checking
+const areFeildsEmpty = (): boolean => {
+  if (userName.value == "") {
+    return true;
+  }
+  if (passWord.value == "") {
+    return true;
+  }
+  return false;
+};
+// return to initiale
+const updateVisualAlert = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      IsUserName.value = false;
+      IsPassWord.value = false;
+    }, 2000);
+  });
+};
+</script>
+
 <template>
   <main
     class="w-screen h-screen items-center justify-center lg:grid grid-cols-[1fr_30px_1fr]"
@@ -8,24 +56,18 @@
       <div class="w-full h-full flex items-center justify-center">
         <div class="w-5/6 md:w-3/5 lg:w-3/6 flex flex-col gap-4">
           <UiInput
-            FocusClass="focus:border-primary focus:outline-0 focus:shadow-md focus:TheShadow"
-            DisabledClass="disabled:text-gray-400"
-            MoreClass=""
+            :IsEmpty="IsUserName"
+            @onChange="updateUserName"
             PlaceHolder="User Name"
           />
           <UiInput
-            FocusClass="focus:border-primary focus:outline-0 focus:shadow-md focus:TheShadow"
-            DisabledClass="disabled:text-gray-400"
-            MoreClass=""
+            :IsEmpty="IsPassWord"
+            @onChange="updatePassWord"
+            Type="password"
             PlaceHolder="Pass Word"
           />
-          <UiButton
-            Class="hover:TheShadow px-2 py-2 text-gray-400 transition-all duration-200 border-2"
-          >
-            Click
-          </UiButton>
+          <UiButton @onClick="logIn"> Click </UiButton>
         </div>
-        <!-- Class=" shadow-sm shadow-black  transition  duration-300 mt-1 block h-10 w-full rounded-sm border-2 border-black px-2 sm:text-sm" -->
       </div>
     </section>
   </main>

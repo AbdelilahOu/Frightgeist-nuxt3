@@ -4,5 +4,5 @@ definePageMeta({
 });
 </script>
 <template>
-  <main class="w-full h-full bg-primary"></main>
+  <section class="w-full h-full"></section>
 </template>
