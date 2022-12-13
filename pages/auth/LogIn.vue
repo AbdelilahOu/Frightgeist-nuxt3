@@ -1,4 +1,10 @@
 <script setup lang="ts">
+useMeta({
+  title: "Log in",
+});
+definePageMeta({
+  layout: "auth-lyout",
+});
 // feilds
 const userName = ref<string>("");
 const passWord = ref<string>("");
@@ -49,7 +55,7 @@ const updateVisualAlert = (): Promise<void> => {
 
 <template>
   <main
-    class="w-screen h-screen items-center justify-center lg:grid grid-cols-[1fr_30px_1fr]"
+    class="w-full h-full items-center justify-center lg:grid grid-cols-[1fr_30px_1fr]"
   >
     <section class="w-full hidden lg:flex h-full bg-white">sdjskd</section>
     <div class="hidden lg:flex">lkjlksdjfkd</div>
