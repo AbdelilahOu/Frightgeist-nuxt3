@@ -2,9 +2,6 @@
 useMeta({
   title: "Register",
 });
-definePageMeta({
-  layout: "auth-lyout",
-});
 // feilds
 const userName = ref<string>("");
 const passWord = ref<string>("");
@@ -28,7 +25,7 @@ const Register = async (): Promise<void> => {
         email: email.value,
       },
     });
-    navigateTo("/");
+    navigateTo("/votes");
     return;
   }
   IsUserName.value = userName.value === "";
@@ -70,7 +67,9 @@ const updateVisualAlert = (): Promise<void> => {
     <div class="hidden lg:flex"></div>
     <section class="w-full h-full flex items-center justify-center text-black">
       <div class="w-full h-full flex items-center justify-center">
-        <div class="w-5/6 md:w-3/5 lg:w-3/6 flex flex-col gap-4">
+        <div
+          class="w-5/6 md:w-3/5 lg:w-3/6 h-full justify-center flex flex-col gap-4"
+        >
           <UiInput
             :IsEmpty="IsUserName"
             @onChange="updateUserName"
@@ -88,6 +87,12 @@ const updateVisualAlert = (): Promise<void> => {
             PlaceHolder="Pass Word"
           />
           <UiButton @onClick="Register"> Register </UiButton>
+          <h1 class="text-gray-500">
+            You dont have an account ?
+            <nuxt-link class="text-gray-900" to="/auth/LogIn"
+              >Click here</nuxt-link
+            >
+          </h1>
         </div>
       </div>
     </section>
