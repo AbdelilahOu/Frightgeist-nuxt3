@@ -22,8 +22,11 @@ const logIn = async (): Promise<void> => {
         passWord: passWord.value,
       },
     });
-    navigateTo("/votes");
-    return;
+    if (data.value?.user) {
+      navigateTo("/votes");
+      return;
+    }
+    navigateTo("/auth/Register");
   }
   IsUserName.value = userName.value === "";
   IsPassWord.value = passWord.value === "";

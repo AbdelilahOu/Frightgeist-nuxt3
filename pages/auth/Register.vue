@@ -25,7 +25,7 @@ const Register = async (): Promise<void> => {
         email: email.value,
       },
     });
-    navigateTo("/votes");
+    navigateTo("/auth/LogIn");
     return;
   }
   IsUserName.value = userName.value === "";

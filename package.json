@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.1.2",
-    "@prisma/client": "^4.6.1"
+    "@pinia/nuxt": "^0.4.6",
+    "@prisma/client": "^4.6.1",
+    "pinia": "^2.0.28"
   }
 }
