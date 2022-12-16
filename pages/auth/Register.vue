@@ -17,7 +17,7 @@ const updateEmail = (Email: string) => (email.value = Email);
 // main action
 const Register = async (): Promise<void> => {
   if (!areFeildsEmpty()) {
-    const { data } = await useFetch("/api/register", {
+    const { data } = await useFetch("/api/auth/register", {
       method: "POST",
       body: {
         userName: userName.value,

@@ -1,4 +1,4 @@
-import { getUserData } from "../../utils/user-repo";
+import { getUserData } from "../../db/user";
 
 export default defineEventHandler(async (event) => {
   const { userName, passWord } = await useBody(event);

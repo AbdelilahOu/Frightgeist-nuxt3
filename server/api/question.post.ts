@@ -1,4 +1,4 @@
-import { createQuestion } from "../utils/question-repo";
+import { createQuestion } from "../db/question";
 
 export default defineEventHandler(async (event) => {
   const { question } = await useBody(event);

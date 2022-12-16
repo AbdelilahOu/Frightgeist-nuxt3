@@ -15,7 +15,7 @@ const updatePassWord = (word: string) => (passWord.value = word);
 // main action
 const logIn = async (): Promise<void> => {
   if (!areFeildsEmpty()) {
-    const { data } = await useFetch("/api/login", {
+    const { data } = await useFetch("/api/auth/login", {
       method: "POST",
       body: {
         userName: userName.value,
