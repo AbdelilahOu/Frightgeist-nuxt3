@@ -1,5 +1,5 @@
 import prisma from "../db/prisma";
-import { userType } from "./types";
+import { userType } from "../models";
 
 export const createUser = (user: userType) => {
   return prisma.user.create({

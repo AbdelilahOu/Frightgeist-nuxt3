@@ -1,5 +1,5 @@
 import prisma from "../db/prisma";
-import { questionType } from "./types";
+import { questionType } from "../models";
 
 export const createQuestion = (question: questionType) => {
   return prisma.questions.create({
