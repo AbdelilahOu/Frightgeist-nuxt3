@@ -8,6 +8,8 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/jsonwebtoken": "^8.5.9",
     "nuxt": "3.0.0-rc.12",
     "prisma": "^4.6.1"
   },
@@ -15,6 +17,8 @@
     "@nuxtjs/tailwindcss": "^6.1.2",
     "@pinia/nuxt": "^0.4.6",
     "@prisma/client": "^4.6.1",
+    "bcrypt": "^5.1.0",
+    "jsonwebtoken": "^8.5.1",
     "pinia": "^2.0.28"
   }
 }
