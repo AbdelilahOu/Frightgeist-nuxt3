@@ -16,3 +16,11 @@ export const getUserData = (name: string) => {
     },
   });
 };
+
+export const getUserDataById = (id: number) => {
+  return prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+};
