@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const createdQuestion = await createQuestion(question);
     if (createdQuestion) {
       return {
-        msg: "creation is done",
+        data: "creation is done",
       };
     }
     return sendError(
@@ -14,8 +14,9 @@ export default defineEventHandler(async (event) => {
       createError({ statusCode: 401, statusMessage: "cant create question" })
     );
   } catch (error) {
-    return {
-      err: error,
-    };
+    return sendError(
+      event,
+      createError({ statusCode: 401, statusMessage: "cant create question" })
+    );
   }
 });

@@ -2,6 +2,13 @@
 useMeta({
   title: "Votes",
 });
+
+onBeforeMount(async () => {
+  const { data } = await useFetch("/api/question/all", {
+    method: "POST",
+  });
+  alert(data.value);
+});
 </script>
 <template>
   <section class="w-full h-full pb-5">
