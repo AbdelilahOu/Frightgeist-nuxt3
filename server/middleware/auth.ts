@@ -5,10 +5,13 @@ export default defineEventHandler(async (event) => {
 
   const IsHandledByThisMiddleware = endPoints.some((endPoint) => {
     const pattern = new UrlPattern(endPoint);
+
     const { url } = event.req;
+
     if (url) {
       return pattern.match(url);
     }
+
     return false;
   });
 
