@@ -19,7 +19,7 @@ model Questions {
 model User {
   id        Int         @id @default(autoincrement())
   email     String      @unique()
-  userName  String      @unique()
+  name      String      @unique()
   passWord  String      @unique()
   questions Questions[]
 }

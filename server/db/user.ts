@@ -9,10 +9,10 @@ export const createUser = (user: userType) => {
   });
 };
 
-export const getUserData = (userName: string) => {
+export const getUserData = (name: string) => {
   return prisma.user.findUnique({
     where: {
-      userName,
+      name,
     },
   });
 };

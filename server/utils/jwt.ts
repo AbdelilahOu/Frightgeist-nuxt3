@@ -1,16 +1,12 @@
-import { sign, verify } from "jsonwebtoken";
-export const CreateToken = async (
-  id: string,
-  name: string,
-  jwt_se: string
-): Promise<string> => {
-  return sign({ id, username: name }, jwt_se);
+import { JwtPayload, sign, verify } from "jsonwebtoken";
+
+export const GenerateToken = (id: number, name: string): string => {
+  const { jwt_se } = useRuntimeConfig();
+  return sign({ id, name }, jwt_se);
 };
-export const ValidateToken = async (
-  token: string,
-  jwt_se: string
-): Promise<{ id: string | boolean }> => {
+
+export const ValidateToken = (token: string): { id: string | JwtPayload } => {
+  const { jwt_se } = useRuntimeConfig();
   const decoded = verify(token, jwt_se);
-  console.log(decoded);
-  return { id: "sfsds" || false };
+  return { id: decoded };
 };

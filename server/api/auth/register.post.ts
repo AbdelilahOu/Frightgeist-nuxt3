@@ -1,11 +1,13 @@
+import { GenerateHash, GenerateSalt } from "~~/server/utils/bcrypt";
 import { createUser } from "../../db/user";
 
 export default defineEventHandler(async (event) => {
-  const { userName, passWord, email } = await useBody(event);
+  const { userName: name, passWord, email } = await useBody(event);
   // user name and password
   try {
-    const user = await createUser({ userName, passWord, email });
-
+    const salt = await GenerateSalt();
+    const HashPassword = await GenerateHash(passWord, salt);
+    const user = await createUser({ name, passWord: HashPassword, email });
     return {
       user,
     };
