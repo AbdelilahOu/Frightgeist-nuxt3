@@ -8,12 +8,14 @@ datasource db {
 }
 
 model Questions {
-  id      Int    @id @default(autoincrement())
-  title   String
-  options Json
-  votes   Json
-  userId  Int
-  user    User   @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  title     String
+  options   Json
+  votes     Json
+  userId    Int
+  endIn     BigInt
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model User {

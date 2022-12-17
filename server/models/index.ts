@@ -9,4 +9,5 @@ export interface questionType {
   options: object;
   votes: object;
   userId: number;
+  endIn: number;
 }
