@@ -14,6 +14,7 @@ model Questions {
   votes     Json
   userId    Int
   endIn     BigInt
+  code      BigInt?
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
 }

@@ -7,7 +7,6 @@ onBeforeMount(async () => {
   const { data } = await useFetch("/api/question/all", {
     method: "POST",
   });
-  alert(data.value);
 });
 </script>
 <template>

@@ -3,7 +3,12 @@ import { getUserDataById } from "../db/user";
 import { ValidateToken } from "../utils/jwt";
 
 export default defineEventHandler(async (event) => {
-  const endPoints = ["/api/vote/:id"];
+  const endPoints = [
+    "/api/vote/:id",
+    "/api/question/:id",
+    "/api/question/all",
+    "/api/question/create",
+  ];
 
   const IsHandledByThisMiddleware = endPoints.some((endPoint) => {
     const pattern = new UrlPattern(endPoint);
@@ -38,7 +43,7 @@ export default defineEventHandler(async (event) => {
       event,
       createError({
         statusCode: 401,
-        statusMessage: "Unauthorized",
+        statusMessage: "Unauthorized token",
       })
     );
   }
