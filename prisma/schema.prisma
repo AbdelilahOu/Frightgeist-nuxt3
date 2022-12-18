@@ -10,19 +10,27 @@ datasource db {
 model Questions {
   id        Int      @id @default(autoincrement())
   title     String
-  options   Json
-  votes     Json
+  options   Json?
+  endsAt    DateTime
   userId    Int
-  endIn     BigInt
-  code      BigInt?
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
+  vote      Vote[]
 }
 
 model User {
   id        Int         @id @default(autoincrement())
-  email     String      @unique()
   name      String      @unique()
-  passWord  String      @unique()
   questions Questions[]
+  vote      Vote[]
+}
+
+model Vote {
+  id         Int       @id @default(autoincrement())
+  createdAt  DateTime  @default(now())
+  choice     Int
+  voter      User      @relation(fields: [voterName], references: [name])
+  voterName  String
+  question   Questions @relation(fields: [questionId], references: [id])
+  questionId Int
 }
