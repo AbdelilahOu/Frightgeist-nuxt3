@@ -1,7 +1,7 @@
 import { makeVote } from "~~/server/db/question";
 
 export default defineEventHandler(async (event) => {
-  const { id, voteFor } = event.context.params;
+  const { id, voteFor } = await useBody(event);
   try {
     const madeAvote = await makeVote(id, voteFor);
     if (madeAvote) {
