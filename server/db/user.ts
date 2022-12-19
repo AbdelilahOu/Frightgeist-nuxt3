@@ -1,24 +1,42 @@
 import prisma from "./prisma";
-import { userType } from "../models";
 
-export const createUser = (user: userType) => {
+export const getAllUsers = () => {
+  return prisma.user.findMany({});
+};
+
+export const createUser = (user) => {
   return prisma.user.create({
     data: {
-      ...user,
+      user,
     },
   });
 };
 
-export const getUserData = (name: string) => {
-  return prisma.user.findUnique({
+export const updateUser = (updateUser) => {
+  const { name, id } = updateUser;
+  return prisma.user.update({
     where: {
+      id,
+    },
+    data: {
       name,
     },
   });
 };
 
-export const getUserDataById = (id: number) => {
+export const getWithQuestions = (id: number) => {
   return prisma.user.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      questions: true,
+    },
+  });
+};
+
+export const deleteUser = (id: number) => {
+  return prisma.user.delete({
     where: {
       id,
     },
