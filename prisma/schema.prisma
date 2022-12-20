@@ -30,7 +30,7 @@ model User {
 model Vote {
   id         Int       @id @default(autoincrement())
   createdAt  DateTime  @default(now())
-  choice     Int
+  choice     String
   voter      User      @relation(fields: [voterName], references: [name])
   voterName  String
   question   Questions @relation(fields: [questionId], references: [id])

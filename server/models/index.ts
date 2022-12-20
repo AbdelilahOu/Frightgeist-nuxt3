@@ -3,7 +3,10 @@ export interface userType {
   email: string;
   passWord: string;
 }
-
+export interface userUpdate {
+  name: string;
+  id: number;
+}
 export interface questionType {
   title: string;
   options: object;

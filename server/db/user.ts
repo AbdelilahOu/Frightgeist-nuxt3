@@ -1,19 +1,20 @@
+import { userType, userUpdate } from "../models";
 import prisma from "./prisma";
 
 export const getAllUsers = () => {
   return prisma.user.findMany({});
 };
 
-export const createUser = (user) => {
+export const createUser = (user: userType) => {
   return prisma.user.create({
     data: {
-      user,
+      ...user,
     },
   });
 };
 
-export const updateUser = (updateUser) => {
-  const { name, id } = updateUser;
+export const updateUser = (user: userUpdate) => {
+  const { name, id } = user;
   return prisma.user.update({
     where: {
       id,
