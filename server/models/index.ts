@@ -1,7 +1,7 @@
 export interface userType {
   name: string;
   email: string;
-  passWord: string;
+  password: string;
 }
 export interface userUpdate {
   name: string;
@@ -12,5 +12,17 @@ export interface questionType {
   options: object;
   votes: object;
   userId: number;
-  endIn: number;
+  endsAt: Date;
+}
+
+export interface updateQType {
+  title?: string;
+  options?: object;
+  endsAt?: Date;
+}
+
+export interface makeVoteType {
+  choice: string;
+  voterName: string;
+  questionId: number;
 }

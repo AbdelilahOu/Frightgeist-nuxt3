@@ -1,21 +1,18 @@
+import { makeVoteType } from "../models";
 import prisma from "./prisma";
 
-export const createVote = (
-  choice: string,
-  voterName: string,
-  questionId: number
-) => {
+export const createVote = (makeVote: makeVoteType) => {
   return prisma.vote.create({
     data: {
-      choice,
+      choice: makeVote.choice,
       voter: {
         connect: {
-          name: voterName,
+          name: makeVote.voterName,
         },
       },
       question: {
         connect: {
-          id: questionId,
+          id: makeVote.questionId,
         },
       },
     },

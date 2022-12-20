@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   try {
     const salt = await GenerateSalt();
     const HashPassword = await GenerateHash(passWord, salt);
-    const user = await createUser({ name, passWord: HashPassword, email });
+    const user = await createUser({ name, password: HashPassword, email });
     return {
       user,
     };

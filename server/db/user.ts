@@ -5,6 +5,14 @@ export const getAllUsers = () => {
   return prisma.user.findMany({});
 };
 
+export const getUserData = (name: string) => {
+  return prisma.user.findUnique({
+    where: {
+      name,
+    },
+  });
+};
+
 export const createUser = (user: userType) => {
   return prisma.user.create({
     data: {

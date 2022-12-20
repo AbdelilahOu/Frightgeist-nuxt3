@@ -1,10 +1,11 @@
+import { questionType, updateQType } from "../models";
 import prisma from "./prisma";
 
-export const getAllQuestion = () => {
+export const getAllQuestions = () => {
   return prisma.questions.findMany({});
 };
 
-export const createQuestion = (Question) => {
+export const createQuestion = (Question: questionType) => {
   const { title, options, userId, endsAt } = Question;
   return prisma.questions.create({
     data: {
@@ -43,13 +44,13 @@ export const getQuestionVotes = (id: number) => {
   });
 };
 
-export const updateQuestion = (id: number) => {
+export const updateQuestion = (id: number, updateQuestion: updateQType) => {
   return prisma.questions.update({
     where: {
       id,
     },
     data: {
-      ...req.body,
+      ...updateQuestion,
     },
   });
 };

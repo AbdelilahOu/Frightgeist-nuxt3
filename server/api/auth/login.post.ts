@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   try {
     const user = await getUserData(userName);
     if (user) {
-      const Validated = await ValidatePassword(passWord, user.passWord);
+      const Validated = await ValidatePassword(passWord, user.password);
       if (Validated) {
         const token = GenerateToken(user.id, user.name);
         return {

@@ -1,9 +1,9 @@
-import { makeVote } from "~~/server/db/question";
+import { createVote } from "~~/server/db/vote";
 
 export default defineEventHandler(async (event) => {
-  const { id, voteFor } = await useBody(event);
+  const { choice, voterName, questionId } = await useBody(event);
   try {
-    const madeAvote = await makeVote(id, voteFor);
+    const madeAvote = await createVote({ choice, voterName, questionId });
     if (madeAvote) {
       return {
         msg: "vote succeded",
