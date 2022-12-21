@@ -13,6 +13,14 @@ export const getUserData = (name: string) => {
   });
 };
 
+export const getUserById = (id: number) => {
+  return prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+};
+
 export const createUser = (user: userType) => {
   return prisma.user.create({
     data: {

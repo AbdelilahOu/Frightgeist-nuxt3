@@ -1,6 +1,11 @@
-export default defineEventHandler((event) => {
+import { deleteAllQuestion } from "~~/server/db/question";
+
+export default defineEventHandler(async (event) => {
   try {
-    return {};
+    const questions = await deleteAllQuestion();
+    return {
+      questions,
+    };
   } catch (error) {
     return sendError(
       event,

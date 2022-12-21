@@ -1,6 +1,11 @@
-export default defineEventHandler((event) => {
+import { updateQuestion } from "~~/server/db/question";
+
+export default defineEventHandler(async (event) => {
+  const { id } = event.context.params;
+  const updateQuestion = await useBody(event);
   try {
-    return {};
+    const updated = await updateQuestion(id, updateQuestion);
+    return { updated };
   } catch (error) {
     return sendError(
       event,

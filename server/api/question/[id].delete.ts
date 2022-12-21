@@ -1,6 +1,12 @@
-export default defineEventHandler((event) => {
+import { deleteQuestion } from "~~/server/db/question";
+
+export default defineEventHandler(async (event) => {
+  const { id } = event.context.params;
   try {
-    return {};
+    const deleted = await deleteQuestion(id);
+    return {
+      deleted,
+    };
   } catch (error) {
     return sendError(
       event,

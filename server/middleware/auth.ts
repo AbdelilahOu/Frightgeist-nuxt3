@@ -1,5 +1,5 @@
 import UrlPattern from "url-pattern";
-import { getUserDataById } from "../db/user";
+import { getUserById } from "../db/user";
 import { ValidateToken } from "../utils/jwt";
 
 export default defineEventHandler(async (event) => {
@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
     );
   }
 
-  const user = await getUserDataById(Number(decoded.id));
+  const user = await getUserById(Number(decoded.id));
 
   event.context.auth = user;
   return;

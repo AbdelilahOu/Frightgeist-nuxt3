@@ -2,12 +2,20 @@ import { questionType, updateQType } from "../models";
 import prisma from "./prisma";
 
 export const getAllQuestions = () => {
-  return prisma.questions.findMany({});
+  return prisma.question.findMany({});
+};
+
+export const getQuestion = (id: number) => {
+  return prisma.question.findUnique({
+    where: {
+      id,
+    },
+  });
 };
 
 export const createQuestion = (Question: questionType) => {
   const { title, options, userId, endsAt } = Question;
-  return prisma.questions.create({
+  return prisma.question.create({
     data: {
       title,
       options,
@@ -22,11 +30,11 @@ export const createQuestion = (Question: questionType) => {
 };
 
 export const deleteAllQuestion = () => {
-  return prisma.questions.deleteMany({});
+  return prisma.question.deleteMany({});
 };
 
 export const deleteQuestion = (id: number) => {
-  return prisma.questions.deleteMany({
+  return prisma.question.deleteMany({
     where: {
       id,
     },
@@ -34,7 +42,7 @@ export const deleteQuestion = (id: number) => {
 };
 
 export const getQuestionVotes = (id: number) => {
-  return prisma.questions.findUnique({
+  return prisma.question.findUnique({
     where: {
       id,
     },
@@ -45,7 +53,7 @@ export const getQuestionVotes = (id: number) => {
 };
 
 export const updateQuestion = (id: number, updateQuestion: updateQType) => {
-  return prisma.questions.update({
+  return prisma.question.update({
     where: {
       id,
     },
@@ -57,7 +65,7 @@ export const updateQuestion = (id: number, updateQuestion: updateQType) => {
 
 export const getCurrentQuestions = () => {
   const currentDate = new Date();
-  return prisma.questions.findMany({
+  return prisma.question.findMany({
     where: {
       createdAt: {
         lt: currentDate,

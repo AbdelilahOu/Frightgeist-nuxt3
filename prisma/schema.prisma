@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Questions {
+model Question {
   id        Int      @id @default(autoincrement())
   title     String
   options   Json?
@@ -19,20 +19,20 @@ model Questions {
 }
 
 model User {
-  id        Int         @id @default(autoincrement())
-  name      String      @unique()
-  email     String      @unique()
-  password  String      @unique()
-  questions Questions[]
+  id        Int        @id @default(autoincrement())
+  name      String     @unique()
+  email     String     @unique()
+  password  String     @unique()
+  questions Question[]
   vote      Vote[]
 }
 
 model Vote {
-  id         Int       @id @default(autoincrement())
-  createdAt  DateTime  @default(now())
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
   choice     String
-  voter      User      @relation(fields: [voterName], references: [name])
+  voter      User     @relation(fields: [voterName], references: [name])
   voterName  String
-  question   Questions @relation(fields: [questionId], references: [id])
+  question   Question @relation(fields: [questionId], references: [id])
   questionId Int
 }

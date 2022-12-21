@@ -1,6 +1,12 @@
-export default defineEventHandler((event) => {
+import { deleteVote } from "~~/server/db/vote";
+
+export default defineEventHandler(async (event) => {
+  const { id } = event.context.params;
   try {
-    return {};
+    const vote = await deleteVote(id);
+    return {
+      vote,
+    };
   } catch (error) {
     return sendError(
       event,

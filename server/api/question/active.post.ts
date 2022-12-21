@@ -1,6 +1,11 @@
-export default defineEventHandler((event) => {
+import { getCurrentQuestions } from "~~/server/db/question";
+
+export default defineEventHandler(async (event) => {
   try {
-    return {};
+    const activeQuestion = await getCurrentQuestions();
+    return {
+      activeQuestion,
+    };
   } catch (error) {
     return sendError(
       event,
