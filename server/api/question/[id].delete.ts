@@ -1,8 +1,10 @@
 import { deleteQuestion } from "~~/server/db/question";
 
 export default defineEventHandler(async (event) => {
+  // get id from params
   const { id } = event.context.params;
   try {
+    // delete the question
     const deleted = await deleteQuestion(id);
     return {
       deleted,
