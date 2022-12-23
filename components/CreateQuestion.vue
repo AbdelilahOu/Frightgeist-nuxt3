@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUser } from "~~/stores/user";
+import { useUser } from "~~/stores/User";
 import { storeToRefs } from "pinia";
 
 // create data
@@ -8,31 +8,31 @@ const options = ref<string[]>([""]);
 const question = ref<string>("");
 const endsAt = ref<string>();
 // change create data
-const changeEndsAt = ([date]: string) => (endsAt.value = date);
-
-const changeOption = ([text, id]: [string, number]) =>
-  (options.value[id] = text);
-
-const changeQuestion = ([text]: string) => (question.value = text);
 
 const removeAnOption = (index: number) => options.value.splice(index, 1);
-
+const changeQuestion = ([text]: string) => (question.value = text);
+const changeEndsAt = ([date]: string) => (endsAt.value = date);
+const changeOption = ([text, id]: [string, number]) => {
+  options.value[id] = text;
+};
 const addAnOption = () => options.value.push("");
 
 const CreatePollQuestion = async () => {
   // { title, options, userId, endsAt }
   const AllFilled =
-    question.value !== "" && options.value.length === 0 && endsAt.value === "";
+    question.value !== "" && options.value.length >= 2 && endsAt.value !== "";
   if (!AllFilled) {
     return;
   }
   const { data } = await useFetch("/api/question/create", {
     method: "POST",
     body: {
-      options: Object.assign({}, options.value),
-      userId: user.value?.id,
-      title: question.value,
-      endsAt: endsAt.value,
+      question: {
+        options: Object.assign({}, options.value),
+        userId: user.value?.id ?? 1,
+        title: question.value,
+        endsAt: endsAt.value,
+      },
     },
   });
   console.log(data.value);
@@ -40,7 +40,7 @@ const CreatePollQuestion = async () => {
 </script>
 
 <template>
-  <div class="rounded-sm h-fit sm:w-4/5 md:w-1/2 lg:w-1/3">
+  <div class="rounded-sm h-fit w-full p-2 sm:w-4/5 md:w-1/2 lg:w-1/3">
     <div class="h-full w-full gap-4 flex flex-col">
       <UiInput
         :IsEmpty="false"

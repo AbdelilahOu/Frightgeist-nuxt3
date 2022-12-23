@@ -3,8 +3,8 @@ import { H3Event } from "h3";
 export default defineEventHandler(async (event: H3Event) => {
   const { question } = await useBody(event);
   try {
+    console.log(question);
     const createdQuestion = await createQuestion(question);
-
     if (createdQuestion) {
       return {
         createdQuestion,

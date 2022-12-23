@@ -5,8 +5,10 @@ import { ValidateToken } from "../utils/jwt";
 export default defineEventHandler(async (event) => {
   const endPoints = [
     "/api/vote/:id",
+    "/api/vote/create",
     "/api/question/:id",
     "/api/question/all",
+    "/api/question/active",
     "/api/question/create",
   ];
 

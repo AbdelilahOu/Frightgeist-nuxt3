@@ -1,7 +1,13 @@
+<script setup lang="ts">
+import { storeToRefs } from "pinia";
+import { useModal } from "./stores/Modal";
+const { IsModal } = storeToRefs(useModal());
+</script>
 <template>
   <main class="w-screen h-screen bg-gray-50 text-white">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <ModalParent v-if="IsModal" />
   </main>
 </template>

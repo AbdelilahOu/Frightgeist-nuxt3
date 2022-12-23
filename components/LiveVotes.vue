@@ -5,7 +5,7 @@
     <div></div>
     <nuxt-link
       class="w-full hover:bg-gray-300 hover:text-gray-600 text-base font-semibold text-gray-500 transition-all duration-200 h-full flex items-center justify-center"
-      :to="`/vote/${1}`"
+      :to="`/question/${1}`"
     >
       <span> Partecipate </span>
     </nuxt-link>
