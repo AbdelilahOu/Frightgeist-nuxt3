@@ -1,6 +1,6 @@
 import { deleteQuestion } from "~~/server/db/question";
-
-export default defineEventHandler(async (event) => {
+import { H3Event } from "h3";
+export default defineEventHandler(async (event: H3Event) => {
   // get id from params
   const { id } = event.context.params;
   try {

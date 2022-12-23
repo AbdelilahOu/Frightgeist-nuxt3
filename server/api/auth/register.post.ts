@@ -1,7 +1,7 @@
 import { GenerateHash, GenerateSalt } from "~~/server/utils/bcrypt";
 import { createUser } from "../../db/user";
-
-export default defineEventHandler(async (event) => {
+import { H3Event } from "h3";
+export default defineEventHandler(async (event: H3Event) => {
   // get user name, password and email from req.body
   const { userName: name, passWord, email } = await useBody(event);
   try {

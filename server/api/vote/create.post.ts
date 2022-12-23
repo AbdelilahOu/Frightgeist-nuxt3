@@ -1,6 +1,6 @@
 import { createVote } from "~~/server/db/vote";
-
-export default defineEventHandler(async (event) => {
+import { H3Event } from "h3";
+export default defineEventHandler(async (event: H3Event) => {
   const { choice, voterName, questionId } = await useBody(event);
   try {
     const madeAvote = await createVote({ choice, voterName, questionId });

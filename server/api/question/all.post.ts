@@ -1,6 +1,6 @@
 import { getAllQuestions } from "../../db/question";
-
-export default defineEventHandler(async (event) => {
+import { H3Event } from "h3";
+export default defineEventHandler(async (event: H3Event) => {
   try {
     const AllQuestions = await getAllQuestions();
     if (AllQuestions) {

@@ -1,6 +1,6 @@
 import { createQuestion } from "../../db/question";
-
-export default defineEventHandler(async (event) => {
+import { H3Event } from "h3";
+export default defineEventHandler(async (event: H3Event) => {
   const { question } = await useBody(event);
   try {
     const createdQuestion = await createQuestion(question);

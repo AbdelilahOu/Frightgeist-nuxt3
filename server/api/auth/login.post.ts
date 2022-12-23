@@ -1,8 +1,8 @@
 import { ValidatePassword } from "~~/server/utils/bcrypt";
 import { GenerateToken } from "~~/server/utils/jwt";
 import { getUserData } from "../../db/user";
-
-export default defineEventHandler(async (event) => {
+import { H3Event } from "h3";
+export default defineEventHandler(async (event: H3Event) => {
   // get data from req.body
   const { userName, passWord } = await useBody(event);
   try {
