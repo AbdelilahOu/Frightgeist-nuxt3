@@ -11,9 +11,9 @@ const IsUserName = ref<boolean>(false);
 const IsPassWord = ref<boolean>(false);
 const IsEmail = ref<boolean>(false);
 // update feilds
-const updateUserName = (Name: string) => (userName.value = Name);
-const updatePassWord = (Word: string) => (passWord.value = Word);
-const updateEmail = (Email: string) => (email.value = Email);
+const updateUserName = ([Name]: string) => (userName.value = Name);
+const updatePassWord = ([Word]: string) => (passWord.value = Word);
+const updateEmail = ([Email]: string) => (email.value = Email);
 // main action
 const Register = async (): Promise<void> => {
   if (!areFeildsEmpty()) {

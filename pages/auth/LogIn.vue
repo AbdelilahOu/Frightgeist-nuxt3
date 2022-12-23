@@ -10,8 +10,8 @@ const passWord = ref<string>("");
 const IsUserName = ref<boolean>(false);
 const IsPassWord = ref<boolean>(false);
 // update feilds
-const updateUserName = (name: string) => (userName.value = name);
-const updatePassWord = (word: string) => (passWord.value = word);
+const updateUserName = ([name]: string) => (userName.value = name);
+const updatePassWord = ([word]: string) => (passWord.value = word);
 // main action
 const logIn = async (): Promise<void> => {
   if (!areFeildsEmpty()) {

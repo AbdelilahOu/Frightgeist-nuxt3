@@ -7,7 +7,7 @@ export default defineEventHandler(async (event: H3Event) => {
 
     if (createdQuestion) {
       return {
-        data: "creation is done",
+        createdQuestion,
       };
     }
 

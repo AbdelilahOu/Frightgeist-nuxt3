@@ -22,6 +22,10 @@ const props = defineProps({
     required: false,
     default: true,
   },
+  Id: {
+    type: Number,
+    required: false,
+  },
 });
 
 const inputValue = ref<string>(props.Value ?? "");
@@ -38,7 +42,7 @@ watch(
 
 <template>
   <input
-    @input="$emit('onChange', inputValue)"
+    @input="$emit('onChange', [inputValue, Id])"
     v-model="inputValue"
     :class="[
       'w-full h-fit text-black/90 px-3 py-2 rounded-sm border-2  transition-all duration-200 focus:border-primary focus:outline-0 focus:shadow-md focus:TheShadow disabled:text-gray-400',

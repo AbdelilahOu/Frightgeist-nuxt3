@@ -10,12 +10,6 @@
 
 <script setup lang="ts">
 defineProps({
-  Type: {
-    type: String,
-  },
-  Class: {
-    type: String,
-  },
   IsDisabled: {
     type: Boolean,
   },
