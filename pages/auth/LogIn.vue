@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAuth } from "~~/stores/AuthStore";
+import { useUser } from "~~/stores/UserStore";
 
 useMeta({
   title: "Log in",
@@ -18,7 +18,7 @@ const updatePassWord = ([word]: string) => (passWord.value = word);
 const logIn = async (): Promise<void> => {
   if (!areFeildsEmpty()) {
     // use auth store
-    useAuth().LogIn(userName.value, passWord.value);
+    useUser().LogIn(userName.value, passWord.value);
   }
   IsUserName.value = userName.value === "";
   IsPassWord.value = passWord.value === "";

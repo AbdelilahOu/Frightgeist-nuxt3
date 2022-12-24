@@ -3,7 +3,6 @@ import { H3Event } from "h3";
 export default defineEventHandler(async (event: H3Event) => {
   const { question } = await useBody(event);
   try {
-    console.log(question);
     const createdQuestion = await createQuestion(question);
     if (createdQuestion) {
       return {
@@ -18,7 +17,7 @@ export default defineEventHandler(async (event: H3Event) => {
   } catch (error) {
     return sendError(
       event,
-      createError({ statusCode: 401, statusMessage: "cant create question" })
+      createError({ statusCode: 401, statusMessage: "catched an err" })
     );
   }
 });

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-const tokenState = useState("token");
+// const tokenState = useState("token");
 
 export const useUser = defineStore("user", {
   state: (): userStore => {
@@ -15,8 +15,8 @@ export const useUser = defineStore("user", {
       });
       if (data.value?.user) {
         this.user = data.value.user;
-        tokenState.value = data.value.token;
-        navigateTo("/votes");
+        localStorage.setItem("token", data.value.token);
+        navigateTo("/question");
         return;
       }
       navigateTo("/auth/Register");

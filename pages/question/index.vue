@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { useModal } from "~~/stores/ModalStore";
+import useOurFetch from "../../composables/useOurFetch";
 useMeta({
   title: "Votes",
 });
 const showCreateModal = () => useModal().toggleModal(true);
 onBeforeMount(async () => {
-  const { data } = await useFetch("/api/question/active", {
+  const data = await useOurFetch("/api/question/all", {
     method: "POST",
   });
+  console.log(data);
 });
 </script>
 <template>

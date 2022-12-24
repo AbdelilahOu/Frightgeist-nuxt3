@@ -5,8 +5,7 @@ export const GenerateToken = (id: number, name: string): string => {
   return jwt.sign({ id, name }, jwt_se);
 };
 
-export const ValidateToken = (token: string): { id: string | JwtPayload } => {
+export const ValidateToken = (token: string) => {
   const { jwt_se } = useRuntimeConfig();
-  const decoded = jwt.verify(token, jwt_se);
-  return { id: decoded };
+  return jwt.verify(token, jwt_se);
 };

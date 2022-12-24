@@ -49,8 +49,7 @@ export default defineEventHandler(async (event) => {
       })
     );
   }
-
-  const user = await getUserById(Number(decoded.id));
+  const user = await getUserById(Number(decoded?.id));
 
   event.context.auth = user;
   return;

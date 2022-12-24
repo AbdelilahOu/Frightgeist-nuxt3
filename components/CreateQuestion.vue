@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useUser } from "~~/stores/UserStore";
 import { storeToRefs } from "pinia";
-
+import useOurFetch from "~~/composables/useOurFetch";
+import { useModal } from "~~/stores/ModalStore";
 // create data
 const { user } = storeToRefs(useUser());
 const options = ref<string[]>([""]);
@@ -24,7 +25,7 @@ const CreatePollQuestion = async () => {
   if (!AllFilled) {
     return;
   }
-  const { data } = await useFetch("/api/question/create", {
+  const data = await useOurFetch("/api/question/create", {
     method: "POST",
     body: {
       question: {
@@ -35,7 +36,9 @@ const CreatePollQuestion = async () => {
       },
     },
   });
-  console.log(data.value);
+  if (data) {
+    useModal().toggleModal(false);
+  }
 };
 </script>
 

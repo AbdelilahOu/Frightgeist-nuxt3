@@ -19,7 +19,7 @@ export const createQuestion = (Question: questionType) => {
     data: {
       title,
       options,
-      endsAt,
+      endsAt: new Date(endsAt),
       user: {
         connect: {
           id: userId,

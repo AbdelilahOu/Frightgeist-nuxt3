@@ -6,8 +6,10 @@ const closeThisModal = () => useModal().toggleModal(false);
 <template>
   <div
     @click.self="closeThisModal"
-    class="h-full z-20 absolute top-0 w-full flex items-center justify-center bg-transparent bg-opacity-20 bg-slate-100"
+    class="h-full z-20 absolute top-0 w-full flex items-center justify-center bg-transparent bg-opacity-40 bg-slate-200"
   >
-    <CreateQuestion />
+    <keep-alive>
+      <CreateQuestion />
+    </keep-alive>
   </div>
 </template>
