@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useUser } from "~~/stores/UserStore";
+
 useMeta({
   title: "Register",
 });
@@ -17,15 +19,11 @@ const updateEmail = ([Email]: string) => (email.value = Email);
 // main action
 const Register = async (): Promise<void> => {
   if (!areFeildsEmpty()) {
-    const { data } = await useFetch("/api/auth/register", {
-      method: "POST",
-      body: {
-        userName: userName.value,
-        passWord: passWord.value,
-        email: email.value,
-      },
+    useUser().Register({
+      userName: userName.value,
+      passWord: passWord.value,
+      email: email.value,
     });
-    navigateTo("/auth/LogIn");
     return;
   }
   IsUserName.value = userName.value === "";

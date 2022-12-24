@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUser } from "~~/stores/User";
+import { useUser } from "~~/stores/UserStore";
 import { storeToRefs } from "pinia";
 
 // create data

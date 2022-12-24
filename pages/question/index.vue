@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useModal } from "~~/stores/Modal";
+import { useModal } from "~~/stores/ModalStore";
 useMeta({
   title: "Votes",
 });

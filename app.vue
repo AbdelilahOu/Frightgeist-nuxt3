@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { useModal } from "./stores/Modal";
+import { useModal } from "./stores/ModalStore";
 const { IsModal } = storeToRefs(useModal());
 </script>
 <template>

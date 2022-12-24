@@ -2,7 +2,7 @@ import { ValidatePassword } from "~~/server/utils/bcrypt";
 import { GenerateToken } from "~~/server/utils/jwt";
 import { getUserData } from "../../db/user";
 import { H3Event } from "h3";
-export default defineEventHandler(async (event: H3Event) => {
+export default defineEventHandler(async (event) => {
   // get data from req.body
   const { userName, passWord } = await useBody(event);
   try {
@@ -15,6 +15,12 @@ export default defineEventHandler(async (event: H3Event) => {
       if (Validated) {
         // create token
         const token = GenerateToken(user.id, user.name);
+
+        setCookie(event, "token", token, {
+          httpOnly: true,
+          sameSite: true,
+        });
+
         return {
           user,
           token,
