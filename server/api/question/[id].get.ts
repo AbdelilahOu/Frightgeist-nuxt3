@@ -3,7 +3,7 @@ import { H3Event } from "h3";
 export default defineEventHandler(async (event: H3Event) => {
   const { id } = event.context.params;
   try {
-    const question = await getQuestion(id);
+    const question = await getQuestion(Number(id));
     return {
       question,
     };

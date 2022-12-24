@@ -1,5 +1,7 @@
+import useAuth from "../composables/useAuth";
 import { defineStore } from "pinia";
-// const tokenState = useState("token");
+
+const { setAuthToken, setAuthUser } = useAuth();
 
 export const useUser = defineStore("user", {
   state: (): userStore => {
@@ -15,7 +17,8 @@ export const useUser = defineStore("user", {
       });
       if (data.value?.user) {
         this.user = data.value.user;
-        localStorage.setItem("token", data.value.token);
+        setAuthToken(data.value.token);
+        setAuthUser(data.value.user);
         navigateTo("/question");
         return;
       }

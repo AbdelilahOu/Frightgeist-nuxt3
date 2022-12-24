@@ -4,7 +4,7 @@ import { useModal } from "./stores/ModalStore";
 const { IsModal } = storeToRefs(useModal());
 </script>
 <template>
-  <main class="w-screen h-screen bg-gray-50 text-white">
+  <main class="w-full h-full bg-gray-50 text-white">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

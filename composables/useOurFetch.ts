@@ -1,5 +1,6 @@
 export default (url: string, options: optionsType) => {
-  const token = localStorage.getItem("token");
+  const { getAuthToken } = useAuth();
+  const token = getAuthToken();
   return $fetch(url, {
     ...options,
     headers: {
