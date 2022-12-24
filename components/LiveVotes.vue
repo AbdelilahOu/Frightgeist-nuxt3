@@ -41,17 +41,18 @@ onMounted(() => {
   >
     <div class="text-black h-full w-full grid grid-rows-[40px_1fr]">
       <div class="flex p-1 justify-center">
-        <span class="bg-gray-400 h-fit w-full text-center rounded-sm p-1">{{
-          leftTime
-        }}</span>
+        <span
+          class="bg-gray-400 h-fit w-full text-center text-base font-semibold rounded-sm p-1"
+          >{{ leftTime }}</span
+        >
       </div>
-      <div>
+      <div class="text-center">
         {{ Title }}
       </div>
     </div>
     <nuxt-link
       class="w-full hover:bg-gray-300 hover:text-gray-600 text-base font-semibold text-gray-500 transition-all duration-200 h-full flex items-center justify-center"
-      :to="`/question/${Id}`"
+      :to="{ path: 'question/' + Id }"
     >
       <span> Partecipate </span>
     </nuxt-link>
