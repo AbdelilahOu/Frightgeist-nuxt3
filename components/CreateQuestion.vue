@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useUser } from "~~/stores/UserStore";
-import { storeToRefs } from "pinia";
 import useOurFetch from "~~/composables/useOurFetch";
 import { useModal } from "~~/stores/ModalStore";
+import { useUser } from "~~/stores/UserStore";
+import { storeToRefs } from "pinia";
 // create data
 const { user } = storeToRefs(useUser());
 const options = ref<string[]>([""]);
