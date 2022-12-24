@@ -2,9 +2,9 @@ import { getCurrentQuestions } from "~~/server/db/question";
 import { H3Event } from "h3";
 export default defineEventHandler(async (event: H3Event) => {
   try {
-    const activeQuestion = await getCurrentQuestions();
+    const activeQuestions = await getCurrentQuestions();
     return {
-      activeQuestion,
+      activeQuestions,
     };
   } catch (error) {
     return sendError(
