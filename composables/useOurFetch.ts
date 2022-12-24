@@ -9,6 +9,6 @@ export default (url: string, options: optionsType) => {
 };
 
 interface optionsType {
-  method?: string;
+  method: string;
   body?: any;
 }
