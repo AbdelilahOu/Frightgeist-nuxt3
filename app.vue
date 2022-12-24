@@ -5,12 +5,10 @@ import { useUser } from "./stores/UserStore";
 
 const { IsModal } = storeToRefs(useModal());
 
-onBeforeMount(() => {
-  useUser().PresisteAuth();
-});
+onBeforeMount(() => useUser().PresisteAuth());
 </script>
 <template>
-  <main class="w-full h-full bg-gray-50 text-white">
+  <main class="w-full h-screen bg-gray-50 text-white">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

@@ -15,11 +15,15 @@ onBeforeMount(async () => {
 </script>
 <template>
   <section class="w-full h-full pb-14">
-    <div class="flex flex-col md:flex-row items-center gap-2 h-full p-2 w-full">
+    <div
+      class="flex flex-col md:flex-row md:items-start place-items-center gap-2 h-full p-2 w-full"
+    >
       <LiveVotes
         v-for="(item, index) in Questions"
         :key="index"
-        :id="item.id"
+        :Id="item.id"
+        :Title="item.title"
+        :Ends="item.endsAt"
       />
     </div>
     <div class="flex items-center fixed bottom-2 justify-center h-fit w-full">

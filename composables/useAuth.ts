@@ -9,8 +9,8 @@ export default () => {
 
   return {
     getAuthToken,
-    getAuthUser,
     setAuthToken,
+    getAuthUser,
     setAuthUser,
   };
 };
