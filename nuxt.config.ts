@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     strict: true,
   },
   runtimeConfig: {
-    jwt_se: "mhsdfjmhdsmofuhfbmkjxbcnnap",
+    jwt_se: process.env.JWT_SE,
     supaBase_url: process.env.SUPABASE_URL,
     supaBase_key: process.env.SUPABASE_KEY,
   },
