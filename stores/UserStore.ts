@@ -15,9 +15,10 @@ export const useUser = defineStore("user", {
       });
       if (data.value?.user) {
         const { setAuthToken, setAuthUser } = useAuth();
-        this.user = data.value.user;
-        setAuthToken(data.value.token);
-        setAuthUser(data.value.user);
+        const { user, token } = data.value;
+        setAuthToken(token);
+        setAuthUser(user);
+        this.user = user;
         navigateTo("/question");
         return;
       }
