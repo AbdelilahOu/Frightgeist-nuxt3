@@ -9,7 +9,9 @@ useMeta({
 
 const QuestionStore = useQuestion();
 const { Questions } = storeToRefs(QuestionStore);
+
 const showCreateModal = () => useModal().toggleModal(true);
+
 onBeforeMount(async () => {
   QuestionStore.getActiveQuestions();
 });

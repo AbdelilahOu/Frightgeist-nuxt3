@@ -3,7 +3,9 @@ import { defineStore } from "pinia";
 export const useQuestion = defineStore("Question", {
   state: (): questionState => {
     return {
-      Questions: [],
+      Questions: null,
+      ChosenQuestion: null,
+      ChosenQuestionVotes: null,
     };
   },
   actions: {
@@ -13,6 +15,11 @@ export const useQuestion = defineStore("Question", {
       });
       this.Questions = data.activeQuestions;
     },
+    pickChosenQuestion: function (id: number) {
+      this.ChosenQuestion =
+        this.Questions?.find((question) => question.id === id) ?? null;
+    },
+    getChosenQuestionVotes: async function (id: number) {},
   },
 });
 
@@ -25,6 +32,16 @@ interface question {
   userId: number;
 }
 
+interface vote {
+  id: number;
+  createdAt: string;
+  choice: string;
+  voterName: string;
+  questionId: number;
+}
+
 interface questionState {
-  Questions: question[];
+  Questions: question[] | null;
+  ChosenQuestion: question | null;
+  ChosenQuestionVotes: vote[] | null;
 }

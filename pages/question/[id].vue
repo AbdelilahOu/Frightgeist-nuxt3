@@ -1,12 +1,15 @@
 <script setup lang="ts">
-const route = useRoute();
-const data: any = await useOurFetch(`/api/question/${route.params.id}`, {
-  method: "GET",
+import { storeToRefs } from "pinia";
+import { useQuestion } from "~~/stores/QuestionStore";
+const questionStore = useQuestion();
+
+const { ChosenQuestion, ChosenQuestionVotes } = storeToRefs(questionStore);
+
+onBeforeMount(() => {
+  questionStore.pickChosenQuestion(Number(useRoute().params.id));
 });
 </script>
 
 <template>
-  <div class="text-black">
-    {{ data?.question }}
-  </div>
+  <div class="text-black">{{ ChosenQuestion }}</div>
 </template>
