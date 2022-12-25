@@ -5,7 +5,9 @@ import { useUser } from "./stores/UserStore";
 
 const { IsModal } = storeToRefs(useModal());
 
-onBeforeMount(() => useUser().PresisteAuth());
+onBeforeMount(() => {
+  useUser().PresisteAuth();
+});
 </script>
 <template>
   <main class="w-full h-screen bg-gray-50 text-white">

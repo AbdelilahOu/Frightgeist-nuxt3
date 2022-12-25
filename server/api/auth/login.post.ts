@@ -15,14 +15,13 @@ export default defineEventHandler(async (event) => {
       if (Validated) {
         // create token
         const token = GenerateToken(user.id, user.name);
-
-        setCookie(event, "token", token, {
-          httpOnly: true,
-          sameSite: true,
-        });
-
+        const { id, name, email } = user;
         return {
-          user,
+          user: {
+            id,
+            name,
+            email,
+          },
           token,
         };
       }

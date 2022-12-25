@@ -1,22 +1,22 @@
 export default () => {
-  const useAuthToken = () => useState<string>("auth_token");
+  const tokenCookie = useCookie<string>("authToken", {
+    expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
+  });
   const setAuthToken = (newToken: string) => {
-    useAuthToken().value = newToken;
-    localStorage.setItem("token", newToken);
+    tokenCookie.value = newToken;
   };
   const getAuthToken = (): string => {
-    return useAuthToken().value ?? localStorage.getItem("token");
+    return tokenCookie.value;
   };
-
-  const useAuthUser = () => useState<user>("auth_user");
+  const userCookie = useCookie<user>("authUser", {
+    expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
+  });
   const setAuthUser = (newUser: user) => {
-    useAuthUser().value = newUser;
-    localStorage.setItem("user", JSON.stringify(newUser));
+    userCookie.value = newUser;
   };
   const getAuthUser = (): user => {
-    return useAuthUser().value ?? JSON.parse(localStorage.getItem("user"));
+    return userCookie.value;
   };
-
   return {
     getAuthToken,
     setAuthToken,

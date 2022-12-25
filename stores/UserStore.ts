@@ -1,7 +1,5 @@
-import useAuth from "../composables/useAuth";
+// import useAuth from "~~/composables/useAuth";
 import { defineStore } from "pinia";
-
-const { setAuthToken, setAuthUser, getAuthUser, getAuthToken } = useAuth();
 
 export const useUser = defineStore("user", {
   state: (): userStore => {
@@ -16,6 +14,7 @@ export const useUser = defineStore("user", {
         body: { userName, passWord },
       });
       if (data.value?.user) {
+        const { setAuthToken, setAuthUser } = useAuth();
         this.user = data.value.user;
         setAuthToken(data.value.token);
         setAuthUser(data.value.user);
@@ -36,13 +35,14 @@ export const useUser = defineStore("user", {
       }
     },
     PresisteAuth: async function () {
+      const { getAuthUser } = useAuth();
       const User: user = getAuthUser();
       console.log(User);
       if (User) {
         this.user = User;
         return;
       }
-      navigateTo({ path: "/auth/LogIn" });
+      navigateTo("/auth/LogIn");
     },
   },
 });
