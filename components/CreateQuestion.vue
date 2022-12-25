@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useOurFetch from "~~/composables/useOurFetch";
+import { useQuestion } from "~~/stores/QuestionStore";
 import { useModal } from "~~/stores/ModalStore";
 import { useUser } from "~~/stores/UserStore";
 import { storeToRefs } from "pinia";
@@ -38,12 +39,15 @@ const CreatePollQuestion = async () => {
   });
   if (data) {
     useModal().toggleModal(false);
+    useQuestion().getActiveQuestions();
   }
 };
 </script>
 
 <template>
-  <div class="rounded-sm h-fit w-full p-2 sm:w-4/5 md:w-1/2 lg:w-1/3">
+  <div
+    class="rounded-sm z-30 bg-white/20 h-fit w-full p-2 sm:w-4/5 md:w-1/2 lg:w-1/3"
+  >
     <div class="h-full w-full gap-4 flex flex-col">
       <UiInput
         :IsEmpty="false"
