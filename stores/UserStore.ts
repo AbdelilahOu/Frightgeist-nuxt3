@@ -37,9 +37,9 @@ export const useUser = defineStore("user", {
     PresisteAuth: async function () {
       const { getAuthUser } = useAuth();
       const User: user = getAuthUser();
-      console.log(User);
       if (User) {
         this.user = User;
+        navigateTo("/question");
         return;
       }
       navigateTo("/auth/LogIn");

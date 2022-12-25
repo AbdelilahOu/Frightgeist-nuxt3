@@ -6,6 +6,7 @@ import { useQuestion } from "~~/stores/QuestionStore";
 useMeta({
   title: "Votes",
 });
+
 const QuestionStore = useQuestion();
 const { Questions } = storeToRefs(QuestionStore);
 const showCreateModal = () => useModal().toggleModal(true);

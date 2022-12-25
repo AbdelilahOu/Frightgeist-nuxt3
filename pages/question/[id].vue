@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const route = useRoute();
-const data = await useOurFetch(`/api/question/${route.params.id}`, {
+const data: any = await useOurFetch(`/api/question/${route.params.id}`, {
   method: "GET",
 });
 </script>
