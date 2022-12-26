@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useQuestion } from "~~/stores/QuestionStore";
-const questionStore = useQuestion();
 
+const questionStore = useQuestion();
 const { ChosenQuestion, ChosenQuestionVotes } = storeToRefs(questionStore);
 
-console.log(ChosenQuestionVotes.value);
-const { SubToChannel, VotesArray } = useSupaBase();
+const { SubToSingleRow, UnsubFromChannel, VotesArray } = useSupaBase();
 
 onBeforeMount(() => {
   questionStore.pickChosenQuestion(Number(useRoute().params.id));
+  SubToSingleRow(Number(useRoute().params.id));
+});
 
-  SubToChannel(Number(useRoute().params.id));
+onBeforeUnmount(() => {
+  UnsubFromChannel();
 });
 </script>
 

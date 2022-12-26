@@ -16,15 +16,7 @@ export default () => {
     });
   });
 
-  const handleChnage = (payload: any) => VotesArray.value.push(payload.new);
   const handleRowChnage = (payload: any) => console.log(payload);
-
-  const SubToChannel = () => {
-    channel.value = supabase.value
-      .channel("*")
-      .on("postgres_changes", { event: "*", schema: "*" }, handleChnage)
-      .subscribe();
-  };
 
   const SubToSingleRow = (questionId: number) => {
     channel.value = supabase.value
@@ -37,7 +29,6 @@ export default () => {
 
   return {
     VotesArray,
-    SubToChannel,
     SubToSingleRow,
     UnsubFromChannel,
   };
