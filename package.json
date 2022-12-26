@@ -14,10 +14,10 @@
     "prisma": "^4.6.1"
   },
   "dependencies": {
-    "@nuxtjs/supabase": "^0.3.0",
     "@nuxtjs/tailwindcss": "^6.1.2",
     "@pinia/nuxt": "^0.4.6",
     "@prisma/client": "^4.6.1",
+    "@supabase/supabase-js": "^2.2.2",
     "bcrypt": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
     "pinia": "^2.0.28",
