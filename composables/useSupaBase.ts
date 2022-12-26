@@ -4,7 +4,7 @@ export default () => {
   const VotesArray = ref<any[]>([]);
   const channel = ref<any>();
 
-  const { supaBase_url, supaBase_key } = useReatimeConfig();
+  const { supaBase_url, supaBase_key } = useRuntimeConfig();
 
   const supabase = createClient(supaBase_url, supaBase_key, {
     realtime: {
