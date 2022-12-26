@@ -3,25 +3,26 @@ import { createClient } from "@supabase/supabase-js";
 export default () => {
   const VotesArray = ref<any[]>([]);
   const channel = ref<any>();
-  const supabase = ref<any>();
 
-  onBeforeMount(() => {
-    const { supaBase_url, supaBase_key } = useRuntimeConfig();
-    supabase.value = createClient(supaBase_url, supaBase_key, {
-      realtime: {
-        params: {
-          eventPerSecond: 30,
-        },
+  const { supaBase_url, supaBase_key } = useRuntimeConfig();
+  const supabase = createClient(supaBase_url, supaBase_key, {
+    realtime: {
+      params: {
+        eventPerSecond: 30,
       },
-    });
+    },
   });
 
   const handleRowChnage = (payload: any) => console.log(payload);
 
-  const SubToSingleRow = (questionId: number) => {
-    channel.value = supabase.value
+  const SubToSingleRow = () => {
+    channel.value = supabase
       .channel("*")
-      .on("postgres_changes", { event: "*", schema: "*" }, handleRowChnage)
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "Vote" },
+        handleRowChnage
+      )
       .subscribe();
   };
 

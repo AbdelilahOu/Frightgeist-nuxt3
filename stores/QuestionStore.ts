@@ -13,6 +13,8 @@ export const useQuestion = defineStore("Question", {
       const data: any = await useOurFetch("/api/question/active", {
         method: "POST",
       });
+      console.log(data);
+
       this.Questions = data.activeQuestions;
     },
     pickChosenQuestion: function (id: number) {
@@ -30,6 +32,7 @@ interface question {
   options: any;
   title: string;
   userId: number;
+  resultId: number;
 }
 
 interface vote {

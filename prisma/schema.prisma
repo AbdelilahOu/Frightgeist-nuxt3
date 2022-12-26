@@ -8,16 +8,14 @@ datasource db {
 }
 
 model Question {
-  id         Int        @id @default(autoincrement())
-  title      String
-  options    Json?
-  endsAt     DateTime
-  userId     Int
-  resultId   Int        @unique()
-  createdAt  DateTime   @default(now())
-  user       User       @relation(fields: [userId], references: [id])
-  vote       Vote[]
-  VoteResult VoteResult @relation(fields: [resultId], references: [id])
+  id        Int      @id @default(autoincrement())
+  title     String
+  options   Json?
+  endsAt    DateTime
+  userId    Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  vote      Vote[]
 }
 
 model User {
@@ -37,11 +35,4 @@ model Vote {
   voterName  String
   question   Question @relation(fields: [questionId], references: [id])
   questionId Int
-}
-
-model VoteResult {
-  id       Int       @id @default(autoincrement())
-  options  Json
-  result   Json
-  question Question?
 }

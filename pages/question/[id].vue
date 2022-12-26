@@ -9,7 +9,7 @@ const { ChosenQuestion, ChosenQuestionVotes } = storeToRefs(questionStore);
 // SUB TO CHANNLE
 onBeforeMount(() => {
   questionStore.pickChosenQuestion(Number(useRoute().params.id));
-  SubToSingleRow(Number(useRoute().params.id));
+  SubToSingleRow();
 });
 // UNSUB
 onBeforeUnmount(() => {
