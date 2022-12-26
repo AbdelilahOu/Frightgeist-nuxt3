@@ -25,6 +25,12 @@ export const createQuestion = (Question: questionType) => {
           id: userId,
         },
       },
+      VoteResult: {
+        create: {
+          options,
+          result: [],
+        },
+      },
     },
   });
 };

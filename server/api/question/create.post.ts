@@ -15,6 +15,7 @@ export default defineEventHandler(async (event: H3Event) => {
       createError({ statusCode: 401, statusMessage: "cant create question" })
     );
   } catch (error) {
+    console.log(error);
     return sendError(
       event,
       createError({ statusCode: 401, statusMessage: "catched an err" })
