@@ -1,10 +1,11 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, RealtimeChannel } from "@supabase/supabase-js";
 
 export default () => {
   const VotesArray = ref<any[]>([]);
-  const channel = ref<any>();
+  const channel = ref<RealtimeChannel>();
 
   const { supaBase_url, supaBase_key } = useRuntimeConfig();
+
   const supabase = createClient(supaBase_url, supaBase_key, {
     realtime: {
       params: {
