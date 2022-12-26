@@ -1,8 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
-export default (channelName: string) => {
-  const VotesArray = ref<[]>([]);
 
-  const { supaBase_url, supaBase_key } = useRuntimeConfig();
+export default () => {
+  const VotesArray = ref<any[]>([]);
+  const channel = ref<any>();
+
+  const { supaBase_url, supaBase_key } = useReatimeConfig();
+
   const supabase = createClient(supaBase_url, supaBase_key, {
     realtime: {
       params: {
@@ -11,19 +14,20 @@ export default (channelName: string) => {
     },
   });
 
-  const channel = supabase.channel("db-vote");
+  const handleChnage = (payload: any) => VotesArray.value.push(payload.new);
 
-  channel.on(
-    "postgres_changes",
-    {
-      event: "INSERT",
-      schema: "public",
-      table: "vote",
-    },
-    (payload) => {
-      console.log(payload);
-    }
-  );
+  const SubToChannel = (questionId: number) => {
+    channel.value = supabase
+      .channel("*")
+      .on("postgres_changes", { event: "*", schema: "*" }, handleChnage)
+      .subscribe();
+  };
 
-  const unsubScribe = () => channel.unsubscribe();
+  const unsubFromChannel = () => channel.value?.unsubscribe();
+
+  return {
+    VotesArray,
+    SubToChannel,
+    unsubFromChannel,
+  };
 };

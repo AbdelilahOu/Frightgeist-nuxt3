@@ -4,7 +4,7 @@ import { useModal } from "~~/stores/ModalStore";
 import { useQuestion } from "~~/stores/QuestionStore";
 
 useMeta({
-  title: "Votes",
+  title: "Questions",
 });
 
 const QuestionStore = useQuestion();

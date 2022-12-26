@@ -5,11 +5,20 @@ const questionStore = useQuestion();
 
 const { ChosenQuestion, ChosenQuestionVotes } = storeToRefs(questionStore);
 
+console.log(ChosenQuestionVotes.value);
+const { SubToChannel, VotesArray } = useSupaBase();
+
 onBeforeMount(() => {
   questionStore.pickChosenQuestion(Number(useRoute().params.id));
+
+  SubToChannel(Number(useRoute().params.id));
 });
 </script>
 
 <template>
-  <div class="text-black">{{ ChosenQuestion }}</div>
+  <div class="text-black">
+    {{ ChosenQuestion }}
+    <br />
+    {{ VotesArray }}
+  </div>
 </template>
