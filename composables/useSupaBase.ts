@@ -1,6 +1,6 @@
 import { createClient, RealtimeChannel } from "@supabase/supabase-js";
 
-export default () => {
+export default (id: number) => {
   const VotesArray = ref<any[]>([]);
   const channel = ref<RealtimeChannel>();
 
@@ -14,7 +14,14 @@ export default () => {
     },
   });
 
-  const handleRowChnage = (payload: any) => console.log(payload);
+  const handleRowChnage = async (payload: any) => {
+    if (payload.new.questionId == id) {
+      const res: any = await useOurFetch(`api/vote/${id}`, {
+        method: "POST",
+      });
+      VotesArray.value = res.votes;
+    }
+  };
 
   const SubToSingleRow = () => {
     channel.value = supabase

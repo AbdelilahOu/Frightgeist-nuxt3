@@ -41,3 +41,11 @@ export const deleteVote = (id: number) => {
     },
   });
 };
+
+export const getAllVotesOfQuestion = (id: number) => {
+  return prisma.vote.findMany({
+    where: {
+      questionId: id,
+    },
+  });
+};

@@ -68,7 +68,7 @@ const updateVisualAlert = (): Promise<void> => {
             Type="password"
             PlaceHolder="Pass Word"
           />
-          <UiButton @onClick="logIn"> Click </UiButton>
+          <UiButton @onClick="logIn"> Log in </UiButton>
           <h1 class="text-gray-500">
             You dont have an account ?
             <nuxt-link class="text-gray-900" to="/auth/Register"
