@@ -25,7 +25,7 @@ export default (id: number) => {
       .channel("*")
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "Vote" },
+        { event: "INSERT", schema: "public", table: "Vote" },
         handleRowChnage
       )
       .subscribe();

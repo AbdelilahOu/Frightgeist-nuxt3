@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useQuestion } from "~~/stores/QuestionStore";
+import { useUser } from "~~/stores/UserStore";
 // use supabase composable
 const { SubToSingleRow, UnsubFromChannel } = useSupaBase(
   Number(useRoute().params.id)
@@ -8,6 +9,18 @@ const { SubToSingleRow, UnsubFromChannel } = useSupaBase(
 // use question store
 const questionStore = useQuestion();
 const { ChosenQuestion, ChosenQuestionVotes } = storeToRefs(questionStore);
+//
+const VoteFor = (choice: string) => {
+  const { user } = storeToRefs(useUser());
+  if (user.value?.name) {
+    questionStore.createVote(
+      choice,
+      Number(useRoute().params.id),
+      user.value?.name
+    );
+  }
+};
+
 // SUB TO CHANNLE
 onBeforeMount(() => {
   questionStore.pickChosenQuestion(Number(useRoute().params.id));
@@ -34,15 +47,17 @@ onMounted(() => {
       <div
         class="rounded-sm z-30 bg-white h-fit w-full p-2 sm:w-4/5 md:w-1/2 lg:w-1/3"
       >
-        <h1 class="px-2 py-1 mb-2">{{ ChosenQuestion?.title }}</h1>
+        <h1 class="py-1 mb-2 text-base font-semibold">
+          {{ ChosenQuestion?.title }}
+        </h1>
         <div class="w-full h-full flex gap-2 flex-col">
-          <span
-            class="bg-gray-400 transition-all duration-200 cursor-pointer hover:bg-gray-200 px-2 py-1 rounded-sm"
+          <QuestionOption
+            @onVote="VoteFor"
             v-for="(option, index) in ChosenQuestion?.options"
             :key="index"
-          >
-            {{ option }}
-          </span>
+            :Option="option"
+            :Progress="70"
+          />
         </div>
       </div>
     </div>

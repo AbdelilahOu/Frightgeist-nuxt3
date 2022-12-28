@@ -21,7 +21,7 @@ onBeforeMount(async () => {
     <div
       class="flex flex-col md:flex-row md:items-start place-items-center gap-2 h-full p-2 w-full"
     >
-      <LiveVotes
+      <LiveQuestion
         v-for="(item, index) in Questions"
         :key="index"
         :Id="item.id"
