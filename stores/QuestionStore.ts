@@ -21,7 +21,12 @@ export const useQuestion = defineStore("Question", {
       this.ChosenQuestion =
         this.Questions?.find((question) => question.id === id) ?? null;
     },
-    getChosenQuestionVotes: async function (id: number) {},
+    getChosenQuestionVotes: async function (id: number) {
+      const res: any = await useOurFetch(`api/vote/${id}`, {
+        method: "POST",
+      });
+      this.ChosenQuestionVotes = res.votes;
+    },
   },
 });
 

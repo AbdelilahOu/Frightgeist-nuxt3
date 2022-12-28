@@ -1,7 +1,7 @@
 import { createClient, RealtimeChannel } from "@supabase/supabase-js";
+import { useQuestion } from "~~/stores/QuestionStore";
 
 export default (id: number) => {
-  const VotesArray = ref<any[]>([]);
   const channel = ref<RealtimeChannel>();
 
   const { supaBase_url, supaBase_key } = useRuntimeConfig();
@@ -16,10 +16,7 @@ export default (id: number) => {
 
   const handleRowChnage = async (payload: any) => {
     if (payload.new.questionId == id) {
-      const res: any = await useOurFetch(`api/vote/${id}`, {
-        method: "POST",
-      });
-      VotesArray.value = res.votes;
+      useQuestion().getChosenQuestionVotes(id);
     }
   };
 
@@ -28,7 +25,7 @@ export default (id: number) => {
       .channel("*")
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "Vote" },
+        { event: "*", schema: "public", table: "Vote" },
         handleRowChnage
       )
       .subscribe();
@@ -37,7 +34,6 @@ export default (id: number) => {
   const UnsubFromChannel = () => channel.value?.unsubscribe();
 
   return {
-    VotesArray,
     SubToSingleRow,
     UnsubFromChannel,
   };

@@ -2,7 +2,7 @@
 import { storeToRefs } from "pinia";
 import { useQuestion } from "~~/stores/QuestionStore";
 // use supabase composable
-const { SubToSingleRow, UnsubFromChannel, VotesArray } = useSupaBase(
+const { SubToSingleRow, UnsubFromChannel } = useSupaBase(
   Number(useRoute().params.id)
 );
 // use question store
@@ -20,7 +20,7 @@ onBeforeUnmount(() => {
 // get statestics
 onMounted(() => {
   watch(
-    () => VotesArray.value,
+    () => ChosenQuestionVotes.value,
     (Votes) => {
       console.log(Votes);
     }

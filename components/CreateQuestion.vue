@@ -30,7 +30,10 @@ const CreatePollQuestion = async () => {
     method: "POST",
     body: {
       question: {
-        options: Object.assign({}, options.value),
+        options: Object.assign(
+          {},
+          options.value.filter((ele) => ele !== "")
+        ),
         userId: user.value?.id ?? 1,
         title: question.value,
         endsAt: endsAt.value,
