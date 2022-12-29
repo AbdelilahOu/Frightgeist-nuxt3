@@ -6,6 +6,8 @@ import { useUser } from "~~/stores/UserStore";
 const ProgressObject = ref<{
   [key: string]: number;
 }>({});
+const colors: string[] = ["red", "blue", "green", "orange", "brown"];
+
 // use supabase composable
 const { SubToSingleRow, UnsubFromChannel } = useSupaBase(
   Number(useRoute().params.id)
@@ -71,6 +73,7 @@ onMounted(() => {
             :key="index"
             :Option="option"
             :Progress="ProgressObject[option]"
+            :Color="colors[index]"
           />
         </div>
       </div>

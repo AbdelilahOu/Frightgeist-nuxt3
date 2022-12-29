@@ -9,12 +9,10 @@ defineProps({
     required: true,
     default: 0,
   },
+  Color: {
+    type: String,
+  },
 });
-
-const getBgColor = () => {
-  const colors: string[] = ["red", "blue", "green", "orange", "brown"];
-  return colors[Math.floor(Math.random() * colors.length)];
-};
 </script>
 <template>
   <div
@@ -26,7 +24,7 @@ const getBgColor = () => {
     </span>
     <span> {{ Progress }} % </span>
     <div
-      :style="`width:${Progress}%; background-color:${getBgColor()}`"
+      :style="`width:${Progress}%; background-color:${Color}`"
       :class="[
         'h-full absolute z-20 transform opacity-50 transition-all duration-200 top-0 left-0',
       ]"
