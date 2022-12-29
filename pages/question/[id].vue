@@ -26,7 +26,6 @@ const VoteFor = (choice: string) => {
     );
   }
 };
-
 // SUB TO CHANNLE
 onBeforeMount(() => {
   questionStore.pickChosenQuestion(Number(useRoute().params.id));
@@ -68,12 +67,12 @@ onMounted(() => {
         </h1>
         <div class="w-full h-full flex gap-2 flex-col">
           <QuestionOption
-            @onVote="VoteFor"
             v-for="(option, index) in ChosenQuestion?.options"
-            :key="index"
-            :Option="option"
+            @onVote="VoteFor"
             :Progress="ProgressObject[option]"
             :Color="colors[index]"
+            :Option="option"
+            :key="index"
           />
         </div>
       </div>

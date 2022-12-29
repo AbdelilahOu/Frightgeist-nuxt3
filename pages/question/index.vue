@@ -2,16 +2,16 @@
 import { storeToRefs } from "pinia";
 import { useModal } from "~~/stores/ModalStore";
 import { useQuestion } from "~~/stores/QuestionStore";
-
+// meta data
 useMeta({
   title: "Questions",
 });
-
+//
 const QuestionStore = useQuestion();
 const { Questions } = storeToRefs(QuestionStore);
-
+//
 const showCreateModal = () => useModal().toggleModal(true);
-
+//
 onBeforeMount(async () => {
   QuestionStore.getActiveQuestions();
 });
