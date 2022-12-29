@@ -1,42 +1,7 @@
-# Nuxt 3 Minimal Starter
+# Voting app
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+## Issues :
 
-## Setup
+- [ ] We are listening on table Vote which means even if theres a vote that doesnt concern the question you are in you will recieve chnages still
 
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+- [ ] Unauthorized changes means you dont get the old or the new row

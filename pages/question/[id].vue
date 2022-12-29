@@ -2,6 +2,10 @@
 import { storeToRefs } from "pinia";
 import { useQuestion } from "~~/stores/QuestionStore";
 import { useUser } from "~~/stores/UserStore";
+// variables
+const ProgressObject = ref<{
+  [key: string]: number;
+}>({});
 // use supabase composable
 const { SubToSingleRow, UnsubFromChannel } = useSupaBase(
   Number(useRoute().params.id)
@@ -32,10 +36,20 @@ onBeforeUnmount(() => {
 });
 // get statestics
 onMounted(() => {
+  // get the votes
+  questionStore.getChosenQuestionVotes(Number(useRoute().params.id));
+  // watch the votes
   watch(
     () => ChosenQuestionVotes.value,
     (Votes) => {
-      console.log(Votes);
+      if (Votes) {
+        const Total = Votes.reduce((acc, vote) => acc + vote._count._all, 0);
+        Votes.forEach((vote) => {
+          ProgressObject.value[vote.choice] = Math.floor(
+            (vote._count._all / Total) * 100
+          );
+        });
+      }
     }
   );
 });
@@ -56,7 +70,7 @@ onMounted(() => {
             v-for="(option, index) in ChosenQuestion?.options"
             :key="index"
             :Option="option"
-            :Progress="70"
+            :Progress="ProgressObject[option]"
           />
         </div>
       </div>

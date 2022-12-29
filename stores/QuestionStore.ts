@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import useVote from "~~/composables/useVote";
 
 export const useQuestion = defineStore("Question", {
   state: (): questionState => {
@@ -22,25 +23,29 @@ export const useQuestion = defineStore("Question", {
         this.Questions?.find((question) => question.id === id) ?? null;
     },
     getChosenQuestionVotes: async function (id: number) {
-      const res: any = await useOurFetch(`api/vote/${id}`, {
+      const res: any = await useOurFetch(`/api/vote/${id}`, {
         method: "POST",
       });
       this.ChosenQuestionVotes = res.votes;
     },
     createVote: async function (choice: string, id: number, voterName: string) {
-      const res: any = await useOurFetch("api/vote/create", {
-        method: "POST",
-        body: {
-          choice,
-          voterName,
-          questionId: id,
-        },
-      });
-      console.log(res);
-      if (res) {
-        //
-        console.log(res);
+      const { setVoteCookie, isAlreaddyVoted } = useVote();
+      if (!isAlreaddyVoted(id)) {
+        const res: any = await useOurFetch("/api/vote/create", {
+          method: "POST",
+          body: {
+            choice,
+            voterName,
+            questionId: id,
+          },
+        });
+        if (res) {
+          setVoteCookie(id);
+        }
+        return;
       }
+      // Notify
+      console.log("already voted");
     },
   },
 });
@@ -56,11 +61,10 @@ interface question {
 }
 
 interface vote {
-  id: number;
-  createdAt: string;
   choice: string;
-  voterName: string;
-  questionId: number;
+  _count: {
+    _all: number;
+  };
 }
 
 interface questionState {

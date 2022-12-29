@@ -15,9 +15,7 @@ export default (id: number) => {
   });
 
   const handleRowChnage = async (payload: any) => {
-    if (payload.new.questionId == id) {
-      useQuestion().getChosenQuestionVotes(id);
-    }
+    useQuestion().getChosenQuestionVotes(id);
   };
 
   const SubToSingleRow = () => {

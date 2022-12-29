@@ -43,7 +43,11 @@ export const deleteVote = (id: number) => {
 };
 
 export const getAllVotesOfQuestion = (id: number) => {
-  return prisma.vote.findMany({
+  return prisma.vote.groupBy({
+    by: ["choice"],
+    _count: {
+      _all: true,
+    },
     where: {
       questionId: id,
     },
