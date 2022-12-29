@@ -15,10 +15,11 @@ const props = defineProps({
 });
 
 const leftTime = ref<string>("");
+const Timer = ref();
 
 onMounted(() => {
   const endTime = new Date(props.Ends).getTime() / 1000;
-  const timer = setInterval(() => {
+  Timer.value = setInterval(() => {
     const startTime = new Date().getTime() / 1000;
     const seconds = endTime - startTime;
     let d = Math.floor(seconds / (3600 * 24));
@@ -32,9 +33,12 @@ onMounted(() => {
 
     leftTime.value = dDisplay + hDisplay + mDisplay + sDisplay;
     if (leftTime.value == "") {
-      clearInterval(timer);
+      clearInterval(Timer.value);
     }
   }, 1000);
+});
+onUnmounted(() => {
+  clearInterval(Timer.value);
 });
 </script>
 
