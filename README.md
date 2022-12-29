@@ -6,4 +6,4 @@
 
 - [ ] Unauthorized changes means you dont get the old or the new row
 
-- [ ] The changes are slow
+- [ ] The changes are slow (listening on changes send a request for newer data, update store data)
