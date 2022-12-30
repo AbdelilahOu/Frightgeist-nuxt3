@@ -6,8 +6,9 @@ import { useUser } from "~~/stores/UserStore";
 const ProgressObject = ref<{
   [key: string]: number;
 }>({});
-const colors: string[] = ["red", "blue", "green", "orange", "brown"];
-
+const colors = ref<string[]>(["red", "blue", "green", "orange", "brown"]);
+const Disable = ref<boolean>(false);
+const Timer = ref();
 // use supabase composable
 const { SubToSingleRow, UnsubFromChannel } = useSupaBase(
   Number(useRoute().params.id)
@@ -53,6 +54,19 @@ onMounted(() => {
       }
     }
   );
+  // watch the time
+  Timer.value = setInterval(() => {
+    if (ChosenQuestion.value?.endsAt) {
+      const { endsAt } = ChosenQuestion.value;
+      if (new Date(endsAt).getTime() - new Date().getTime() <= 0) {
+        Disable.value = true;
+        clearInterval(Timer.value);
+      }
+    }
+  }, 1000);
+});
+onUnmounted(() => {
+  clearInterval(Timer.value);
 });
 </script>
 
@@ -73,6 +87,7 @@ onMounted(() => {
             :Color="colors[index]"
             :Option="option"
             :key="index"
+            :IsDisabled="Disable"
           />
         </div>
       </div>
