@@ -5,16 +5,17 @@ import { useModal } from "~~/stores/ModalStore";
 import { useUser } from "~~/stores/UserStore";
 import { storeToRefs } from "pinia";
 import { useNotifications } from "~~/stores/NotificationStore";
+import useQuestionCookie from "~~/composables/useQuestionCookie";
 // create data
 const { user } = storeToRefs(useUser());
 const options = ref<string[]>([""]);
 const question = ref<string>("");
-const endsAt = ref<string>();
+const endsAt = ref<number>(0);
 // change create data
 
 const removeAnOption = (index: number) => options.value.splice(index, 1);
 const changeQuestion = ([text]: string) => (question.value = text);
-const changeEndsAt = ([date]: string) => (endsAt.value = date);
+const changeEndsAt = ([time]: [number]) => (endsAt.value = time);
 const changeOption = ([text, id]: [string, number]) => {
   options.value[id] = text;
 };
@@ -29,7 +30,7 @@ const addAnOption = () => {
 const CreatePollQuestion = async () => {
   // { title, options, userId, endsAt }
   const AllFilled =
-    question.value !== "" && options.value.length >= 2 && endsAt.value !== "";
+    question.value !== "" && options.value.length >= 2 && endsAt.value !== 0;
   if (!AllFilled) {
     return;
   }
@@ -43,14 +44,14 @@ const CreatePollQuestion = async () => {
         ),
         userId: user.value?.id ?? 1,
         title: question.value,
-        endsAt: new Date(
-          new Date().getTime() + Number(endsAt.value) * 60 * 1000
-        ),
+        endsAt: new Date(new Date().getTime() + endsAt.value * 60 * 1000),
       },
     },
   });
   if (data) {
     navigateTo(`question/${data.createdQuestion.id}`);
+    const { setQuestionCookie } = useQuestionCookie(endsAt.value);
+    setQuestionCookie(data.createdQuestion.id);
     useModal().toggleModal(false);
     useQuestion().getActiveQuestions();
   }

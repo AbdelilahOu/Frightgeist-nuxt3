@@ -13,10 +13,10 @@ const props = defineProps({
     required: true,
   },
 });
-
+//
 const leftTime = ref<string>("");
 const Timer = ref();
-
+//
 onMounted(() => {
   const endTime = new Date(props.Ends).getTime() / 1000;
   Timer.value = setInterval(() => {
