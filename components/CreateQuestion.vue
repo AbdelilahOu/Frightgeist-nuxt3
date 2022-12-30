@@ -4,6 +4,7 @@ import { useQuestion } from "~~/stores/QuestionStore";
 import { useModal } from "~~/stores/ModalStore";
 import { useUser } from "~~/stores/UserStore";
 import { storeToRefs } from "pinia";
+import { useNotifications } from "~~/stores/NotificationStore";
 // create data
 const { user } = storeToRefs(useUser());
 const options = ref<string[]>([""]);
@@ -17,7 +18,13 @@ const changeEndsAt = ([date]: string) => (endsAt.value = date);
 const changeOption = ([text, id]: [string, number]) => {
   options.value[id] = text;
 };
-const addAnOption = () => options.value.push("");
+const addAnOption = () => {
+  if (options.value.length <= 4) {
+    options.value.push("");
+    return;
+  }
+  useNotifications().updateSingle("Too many options");
+};
 
 const CreatePollQuestion = async () => {
   // { title, options, userId, endsAt }
@@ -26,7 +33,7 @@ const CreatePollQuestion = async () => {
   if (!AllFilled) {
     return;
   }
-  const data = await useOurFetch("/api/question/create", {
+  const data: any = await useOurFetch("/api/question/create", {
     method: "POST",
     body: {
       question: {
@@ -36,11 +43,14 @@ const CreatePollQuestion = async () => {
         ),
         userId: user.value?.id ?? 1,
         title: question.value,
-        endsAt: endsAt.value,
+        endsAt: new Date(
+          new Date().getTime() + Number(endsAt.value) * 60 * 1000
+        ),
       },
     },
   });
   if (data) {
+    navigateTo(`question/${data.createdQuestion.id}`);
     useModal().toggleModal(false);
     useQuestion().getActiveQuestions();
   }
@@ -57,12 +67,19 @@ const CreatePollQuestion = async () => {
         PlaceHolder="Question"
         @onChange="changeQuestion"
       />
-      <UiInput
-        :IsEmpty="false"
-        PlaceHolder="End in..."
-        @onChange="changeEndsAt"
-        Type="datetime-local"
-      />
+      <div class="grid grid-cols-[1fr_70px] gap-1">
+        <UiInput
+          :IsEmpty="false"
+          PlaceHolder="End in ... 5 minutes"
+          @onChange="changeEndsAt"
+          Type="number"
+        />
+        <span
+          class="h-full w-full font-semibold text-gray-400 border-gray-300 border-2 bg-gray-200 flex items-center justify-center rounded-sm text-center"
+        >
+          <span> minutes </span>
+        </span>
+      </div>
       <div class="flex flex-col">
         <TransitionGroup name="list">
           <div

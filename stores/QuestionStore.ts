@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import useVote from "~~/composables/useVote";
+import useVote from "~~/composables/useQuestion";
 
 export const useQuestion = defineStore("Question", {
   state: (): questionState => {
@@ -18,9 +18,15 @@ export const useQuestion = defineStore("Question", {
 
       this.Questions = data.activeQuestions;
     },
-    pickChosenQuestion: function (id: number) {
+    pickChosenQuestion: async function (id: number) {
       this.ChosenQuestion =
         this.Questions?.find((question) => question.id === id) ?? null;
+      if (this.ChosenQuestion) {
+        const res: any = await useOurFetch(`/api/question/${id}`, {
+          method: "GET",
+        });
+        this.ChosenQuestion = res.question;
+      }
     },
     getChosenQuestionVotes: async function (id: number) {
       const res: any = await useOurFetch(`/api/vote/${id}`, {
@@ -29,7 +35,7 @@ export const useQuestion = defineStore("Question", {
       this.ChosenQuestionVotes = res.votes;
     },
     createVote: async function (choice: string, id: number, voterName: string) {
-      const { setVoteCookie, isAlreaddyVoted } = useVote();
+      const { setVoteCookie, isAlreaddyVoted } = useQuestion();
       if (!isAlreaddyVoted(id)) {
         const res: any = await useOurFetch("/api/vote/create", {
           method: "POST",

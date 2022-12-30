@@ -6,6 +6,7 @@ export default () => {
   const setVoteCookie = (id: number) => (voteCookie.value = id);
   //   check if we voted on a spesific question
   const isAlreaddyVoted = (id: number) => voteCookie.value == id;
+  //
   return {
     setVoteCookie,
     isAlreaddyVoted,

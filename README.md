@@ -14,4 +14,4 @@
 
 - [ ] whene a question is created by the user we force the user to stay in the question page till the time is ended
 
-- [ ] reduce picked time to few minutes
+- [x] reduce picked time to few minutes
