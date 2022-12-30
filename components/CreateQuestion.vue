@@ -49,10 +49,15 @@ const CreatePollQuestion = async () => {
     },
   });
   if (data) {
+    // navigate to created question
     navigateTo(`question/${data.createdQuestion.id}`);
+    // force creator to stay
     const { setQuestionCookie } = useQuestionCookie(endsAt.value);
     setQuestionCookie(data.createdQuestion.id);
+    // hide create quetion modal
     useModal().toggleModal(false);
+    // get this question
+    // rewrite the app logic you are calling deff things at the same time
     useQuestion().getActiveQuestions();
   }
 };
