@@ -10,7 +10,7 @@
 
 - [ ] Votes are stopped whene the time is over but its done in the front how about we check for endsdate in the backend
 
-## new Idea which will help us in some part of the app :
+## Improvements :
 
 - [ ] whene a question is created by the user we force the user to stay in the question page till the time is ended
 
