@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
+import useQuestionCookie from "~~/composables/useQuestionCookie";
 import { useQuestion } from "~~/stores/QuestionStore";
 import { useUser } from "~~/stores/UserStore";
 // variables
@@ -61,6 +62,8 @@ onMounted(() => {
       if (new Date(endsAt).getTime() - new Date().getTime() <= 0) {
         Disable.value = true;
         clearInterval(Timer.value);
+        const { setQuestionCookie } = useQuestionCookie();
+        setQuestionCookie(0);
       }
     }
   }, 1000);
@@ -85,9 +88,9 @@ onUnmounted(() => {
             @onVote="VoteFor"
             :Progress="ProgressObject[option]"
             :Color="colors[index]"
+            :IsDisabled="Disable"
             :Option="option"
             :key="index"
-            :IsDisabled="Disable"
           />
         </div>
       </div>

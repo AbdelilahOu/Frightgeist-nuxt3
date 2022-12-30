@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import useQuestionCookie from "~~/composables/useQuestionCookie";
+import { useNotifications } from "~~/stores/NotificationStore";
 import useOurFetch from "~~/composables/useOurFetch";
 import { useQuestion } from "~~/stores/QuestionStore";
 import { useModal } from "~~/stores/ModalStore";
 import { useUser } from "~~/stores/UserStore";
 import { storeToRefs } from "pinia";
-import { useNotifications } from "~~/stores/NotificationStore";
-import useQuestionCookie from "~~/composables/useQuestionCookie";
 // create data
 const { user } = storeToRefs(useUser());
 const options = ref<string[]>([""]);
@@ -14,7 +14,7 @@ const endsAt = ref<number>(0);
 // change create data
 
 const removeAnOption = (index: number) => options.value.splice(index, 1);
-const changeQuestion = ([text]: string) => (question.value = text);
+const changeQuestion = ([text]: [string]) => (question.value = text);
 const changeEndsAt = ([time]: [number]) => (endsAt.value = time);
 const changeOption = ([text, id]: [string, number]) => {
   options.value[id] = text;
