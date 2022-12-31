@@ -56,9 +56,6 @@ const CreatePollQuestion = async () => {
     setQuestionCookie(data.createdQuestion.id);
     // hide create quetion modal
     useModal().toggleModal(false);
-    // get this question
-    // rewrite the app logic you are calling deff things at the same time
-    useQuestion().getActiveQuestions();
   }
 };
 </script>

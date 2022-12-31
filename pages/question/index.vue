@@ -2,6 +2,9 @@
 import { storeToRefs } from "pinia";
 import { useModal } from "~~/stores/ModalStore";
 import { useQuestion } from "~~/stores/QuestionStore";
+definePageMeta({
+  middleware: ["auth-middleware", "question-middleware"],
+});
 // meta data
 useMeta({
   title: "Questions",

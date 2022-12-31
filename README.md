@@ -10,8 +10,12 @@
 
 - [ ] Votes are stopped whene the time is over but its done in the front how about we check for endsdate in the backend
 
+- [ ] Something is wrogn with middlewares i guess
+
 ## Improvements :
 
-- [ ] whene a question is created by the user we force the user to stay in the question page till the time is ended
+- [x] whene a question is created by the user we force the user to stay in the question page till the time is ended (done by creating an other middleware and abortNavigation helper)
 
 - [x] reduce picked time to few minutes
+
+- [] dont allow user to create an other question if the theres an active one

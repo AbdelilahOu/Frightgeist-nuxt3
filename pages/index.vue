@@ -4,7 +4,7 @@ definePageMeta({
 });
 </script>
 <template>
-  <section
-    class="w-full h-full flex flex-col items-center content-center"
-  ></section>
+  <section class="w-full h-full flex flex-col items-center content-center">
+    sdjlksjdlksds
+  </section>
 </template>

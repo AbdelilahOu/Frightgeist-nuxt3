@@ -19,14 +19,18 @@ export const useQuestion = defineStore("Question", {
       this.Questions = data.activeQuestions;
     },
     pickChosenQuestion: async function (id: number) {
-      this.ChosenQuestion =
-        this.Questions?.find((question) => question.id === id) ?? null;
-      if (this.ChosenQuestion) {
-        const res: any = await useOurFetch(`/api/question/${id}`, {
-          method: "GET",
-        });
-        this.ChosenQuestion = res.question;
+      const QuestionExists = this.Questions?.find(
+        (question) => question.id === id
+      );
+
+      if (QuestionExists) {
+        this.ChosenQuestion = QuestionExists;
+        return;
       }
+      const res: any = await useOurFetch(`/api/question/${id}`, {
+        method: "GET",
+      });
+      this.ChosenQuestion = res.question;
     },
     getChosenQuestionVotes: async function (id: number) {
       const res: any = await useOurFetch(`/api/vote/${id}`, {

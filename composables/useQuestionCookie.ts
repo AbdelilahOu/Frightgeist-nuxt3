@@ -2,6 +2,7 @@ export default (minutes: number = 0) => {
   const voteCookie = useCookie<number>("vote", {
     expires: new Date(new Date().getTime() + 60 * 1000),
   });
+  // we set the cookie expire date to life span of the created question
   const questionCookie = useCookie<number>("question", {
     expires: new Date(new Date().getTime() + minutes * 60 * 1000),
   });

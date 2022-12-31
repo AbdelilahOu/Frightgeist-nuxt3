@@ -9,9 +9,6 @@ defineProps({
     required: true,
     default: 0,
   },
-  Color: {
-    type: String,
-  },
   IsDisabled: {
     type: Boolean,
     required: true,
@@ -30,9 +27,9 @@ defineProps({
     <span> {{ Progress }} % </span>
     <div
       v-if="!IsDisabled"
-      :style="`width:${Progress}%; background-color:${Color}`"
+      :style="`width:${Progress}%;`"
       :class="[
-        'h-full  absolute z-20 transform opacity-50 transition-all duration-200 top-0 left-0',
+        'h-full  absolute z-20  bg-gray-300 transform opacity-50 transition-all duration-200 top-0 left-0',
       ]"
     ></div>
   </button>

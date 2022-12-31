@@ -3,11 +3,9 @@ import { storeToRefs } from "pinia";
 import useQuestionCookie from "~~/composables/useQuestionCookie";
 import { useQuestion } from "~~/stores/QuestionStore";
 import { useUser } from "~~/stores/UserStore";
+
 // variables
-const ProgressObject = ref<{
-  [key: string]: number;
-}>({});
-const colors = ref<string[]>(["red", "blue", "green", "orange", "brown"]);
+const ProgressObject = ref<{ [key: string]: number }>({});
 const Disable = ref<boolean>(false);
 const Timer = ref();
 // use supabase composable
@@ -28,7 +26,7 @@ const VoteFor = (choice: string) => {
     );
   }
 };
-// SUB TO CHANNLE
+// SUB TO CHANNLE AND GET QUESTION
 onBeforeMount(() => {
   questionStore.pickChosenQuestion(Number(useRoute().params.id));
   SubToSingleRow();
@@ -87,7 +85,6 @@ onUnmounted(() => {
             v-for="(option, index) in ChosenQuestion?.options"
             @onVote="VoteFor"
             :Progress="ProgressObject[option]"
-            :Color="colors[index]"
             :IsDisabled="Disable"
             :Option="option"
             :key="index"
