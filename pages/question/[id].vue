@@ -37,7 +37,10 @@ const TimeHaveEnded = () => {
       maxValueKey = key;
     }
   }
-
+  // get index
+  // get the value with the most votes
+  // invert the keys and values
+  // use it to get the index
   WinnerIndex.value = Object.fromEntries(
     Object.entries(ChosenQuestion.value?.options).map(
       ([key, value]): [any, string] => [value, key]
