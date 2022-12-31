@@ -2,6 +2,7 @@ import { createQuestion } from "../../db/question";
 import { H3Event } from "h3";
 export default defineEventHandler(async (event: H3Event) => {
   const { question } = await useBody(event);
+  console.log(question);
   try {
     const createdQuestion = await createQuestion(question);
     if (createdQuestion) {

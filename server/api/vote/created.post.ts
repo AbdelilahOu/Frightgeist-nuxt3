@@ -1,9 +1,9 @@
-import { deleteVote } from "~~/server/db/vote";
 import { H3Event } from "h3";
+import { findVote } from "~~/server/db/vote";
 export default defineEventHandler(async (event: H3Event) => {
-  const { id } = event.context.params;
+  const { voterName, questionId } = await useBody(event);
   try {
-    const vote = await deleteVote(id);
+    const vote = await findVote(voterName, Number(questionId));
     return {
       vote,
     };

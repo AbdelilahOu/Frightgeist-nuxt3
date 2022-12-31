@@ -17,7 +17,7 @@
 
 - [ ] Votes are stopped whene the time is over but its done in the front how about we check for endsdate in the backend
 
-- [ ] duplicate Votes
+- [x] duplicate Votes (changed vote.create to vote.upsert)
 
 - [x] Something is wrogn with middlewares i guess
 

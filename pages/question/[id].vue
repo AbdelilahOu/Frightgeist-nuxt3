@@ -4,28 +4,24 @@ import { useUser } from "~~/stores/UserStore";
 import { storeToRefs } from "pinia";
 
 // variables
-const { timerSecond, timerDate } = useTimer();
+//
 const ProgressObject = ref<{ [key: string]: number }>({});
+const questionId: number = Number(useRoute().params.id);
 const Disable = ref<boolean>(false);
 const ExpiresIn = ref<string>("");
 const WinnerIndex = ref<number>();
 const Timer = ref();
 // use supabase composable
-const { SubToSingleRow, UnsubFromChannel } = useSupaBase(
-  Number(useRoute().params.id)
-);
 // use question store
 const questionStore = useQuestion();
 const { ChosenQuestion, ChosenQuestionVotes } = storeToRefs(questionStore);
+const { SubToSingleRow, UnsubFromChannel } = useSupaBase(questionId);
+const { timerSecond, timerDate } = useTimer();
+const { user } = storeToRefs(useUser());
 //
 const VoteFor = (choice: string) => {
-  const { user } = storeToRefs(useUser());
   if (user.value?.name) {
-    questionStore.createVote(
-      choice,
-      Number(useRoute().params.id),
-      user.value?.name
-    );
+    questionStore.createVote(choice, questionId, user.value?.name);
   }
 };
 //
@@ -49,7 +45,7 @@ const TimeHaveEnded = () => {
 };
 // SUB TO CHANNLE AND GET QUESTION
 onBeforeMount(() => {
-  questionStore.pickChosenQuestion(Number(useRoute().params.id));
+  questionStore.pickChosenQuestion(questionId);
   SubToSingleRow();
 });
 // UNSUB
@@ -59,7 +55,11 @@ onBeforeUnmount(() => {
 // get statestics
 onMounted(() => {
   // get the votes
-  questionStore.getChosenQuestionVotes(Number(useRoute().params.id));
+  questionStore.getChosenQuestionVotes(questionId);
+  const name = user.value?.name;
+  if (name) {
+    questionStore.getCreatedVote(name, questionId);
+  }
   // watch the votes
   watch(
     () => ChosenQuestionVotes.value,
@@ -72,6 +72,10 @@ onMounted(() => {
           );
         });
       }
+    },
+    {
+      deep: true,
+      immediate: true,
     }
   );
   // watch the time
@@ -80,7 +84,7 @@ onMounted(() => {
       const { endsAt } = ChosenQuestion.value;
       const endsSeconds = new Date(endsAt).getTime();
       ExpiresIn.value = timerDate(endsSeconds);
-      if (timerSecond(endsSeconds)) {
+      if (!timerSecond(endsSeconds)) {
         Disable.value = true;
         clearInterval(Timer.value);
         TimeHaveEnded();
@@ -96,7 +100,7 @@ onUnmounted(() => {
 <template>
   <div class="text-black h-full w-full">
     <div
-      class="h-full w-full grid grid-cols-1 grid-rows-3 items-center justify-center"
+      class="h-full w-full grquestionId grquestionId-cols-1 grquestionId-rows-3 items-center justify-center"
     >
       <div
         class="h-full font-extrabold text-gray-400 text-5xl sm:text-6xl w-full flex items-center justify-center"
@@ -107,7 +111,7 @@ onUnmounted(() => {
       </div>
       <div class="flex h-full w-full justify-center items-center">
         <div
-          class="rounded-sm flex flex-col z-30 bg-white h-fit w-full p-2 sm:w-4/5 md:w-1/2 lg:w-1/3"
+          class="rounded-sm flex flex-col z-30 h-fit w-full p-2 sm:w-4/5 md:w-1/2 lg:w-1/3"
         >
           <h1 class="py-1 mb-2 font-semibold text-xl">
             {{ ChosenQuestion?.title }}

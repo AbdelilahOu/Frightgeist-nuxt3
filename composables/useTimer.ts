@@ -1,6 +1,6 @@
 export default () => {
   const timerSecond = (endsAt: number): boolean => {
-    return endsAt - new Date().getTime() <= 0;
+    return endsAt - new Date().getTime() >= 0;
   };
 
   const timerDate = (endTime: number): string => {

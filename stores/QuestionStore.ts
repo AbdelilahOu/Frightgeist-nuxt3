@@ -54,7 +54,8 @@ export const useQuestion = defineStore("Question", {
         // if there is it will update the exisstign one
         // so in case we dont have a vote id we give it id == 0 and we all know
         // sql rows dont start with 0
-        if (timerSecond(new Date(this.ChosenQuestion?.endsAt).getTime())) {
+        const { endsAt } = this.ChosenQuestion;
+        if (timerSecond(new Date(endsAt).getTime())) {
           const res: any = await useOurFetch("/api/vote/create", {
             method: "POST",
             body: {
@@ -70,9 +71,21 @@ export const useQuestion = defineStore("Question", {
           }
           return;
         }
+        useNotifications().updateSingle("sth is wrong");
+        return;
       }
       // Notify
       useNotifications().updateSingle("You have already voted");
+    },
+    getCreatedVote: async function (voterName: string, questionId: number) {
+      const res: any = await useOurFetch("/api/vote/created", {
+        method: "POST",
+        body: {
+          voterName,
+          questionId,
+        },
+      });
+      this.MadeVote = res.vote;
     },
   },
 });

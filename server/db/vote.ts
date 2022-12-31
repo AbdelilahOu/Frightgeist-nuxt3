@@ -59,3 +59,12 @@ export const getAllVotesOfQuestion = (id: number) => {
     },
   });
 };
+
+export const findVote = (voterName: string, questionId: number) => {
+  return prisma.vote.findMany({
+    where: {
+      voterName,
+      questionId,
+    },
+  });
+};

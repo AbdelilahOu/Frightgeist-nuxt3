@@ -15,7 +15,6 @@ export const getQuestion = (id: number) => {
 
 export const createQuestion = (Question: questionType) => {
   const { title, options, userId, endsAt } = Question;
-
   return prisma.question.create({
     data: {
       title,
