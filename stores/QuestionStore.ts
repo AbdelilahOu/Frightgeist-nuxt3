@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import useQuestionCookie from "~~/composables/useQuestionCookie";
 import { useNotifications } from "~~/stores/NotificationStore";
+import { questionState } from "~~/types";
 
 export const useQuestion = defineStore("Question", {
   state: (): questionState => {
@@ -75,33 +76,3 @@ export const useQuestion = defineStore("Question", {
     },
   },
 });
-
-interface question {
-  createdAt: string;
-  endsAt: string;
-  id: number;
-  options: any;
-  title: string;
-  userId: number;
-  resultId: number;
-}
-
-interface voteStats {
-  choice: string;
-  _count: {
-    _all: number;
-  };
-}
-
-interface questionState {
-  Questions: question[] | null;
-  ChosenQuestion: question | null;
-  ChosenQuestionVotes: voteStats[] | null;
-  MadeVote: {
-    id: number;
-    createdAt: string;
-    choice: string;
-    voterName: string;
-    questionId: number;
-  } | null;
-}

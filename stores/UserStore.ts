@@ -1,4 +1,5 @@
 // import useAuth from "~~/composables/useAuth";
+import { RegisterUser, user, userStore } from "~~/types";
 import { defineStore } from "pinia";
 
 export const useUser = defineStore("user", {
@@ -49,19 +50,3 @@ export const useUser = defineStore("user", {
     },
   },
 });
-
-interface userStore {
-  user: user | null;
-}
-
-interface user {
-  id: number;
-  name: string;
-  email: string;
-}
-
-interface RegisterUser {
-  userName: string;
-  passWord: string;
-  email: string;
-}

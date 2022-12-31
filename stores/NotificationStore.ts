@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 export const useNotifications = defineStore("Notifications", {
-  state: (): Notifications => {
+  state: (): { Notification: string } => {
     return {
       Notification: "",
     };
@@ -15,7 +15,3 @@ export const useNotifications = defineStore("Notifications", {
     },
   },
 });
-
-interface Notifications {
-  Notification: string;
-}

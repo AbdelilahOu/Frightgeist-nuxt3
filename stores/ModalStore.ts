@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 export const useModal = defineStore("Modal", {
-  state: () => {
+  state: (): { IsModal: boolean } => {
     return {
       IsModal: false,
     };

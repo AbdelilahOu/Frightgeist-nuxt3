@@ -1,3 +1,4 @@
+import { user } from "~~/types";
 export default () => {
   const tokenCookie = useCookie<string>("authToken", {
     expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
@@ -24,9 +25,3 @@ export default () => {
     setAuthUser,
   };
 };
-
-interface user {
-  id: number;
-  name: string;
-  email: string;
-}
