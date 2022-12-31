@@ -8,6 +8,7 @@ const { timerSecond, timerDate } = useTimer();
 const ProgressObject = ref<{ [key: string]: number }>({});
 const Disable = ref<boolean>(false);
 const ExpiresIn = ref<string>("");
+const WinnerIndex = ref<number>();
 const Timer = ref();
 // use supabase composable
 const { SubToSingleRow, UnsubFromChannel } = useSupaBase(
@@ -29,7 +30,19 @@ const VoteFor = (choice: string) => {
 };
 //
 const TimeHaveEnded = () => {
-  console.log("time ended");
+  let maxValueKey: string = Object.keys(ProgressObject.value)[0];
+  let max = 0;
+  for (const [key, value] of Object.entries(ProgressObject.value)) {
+    if (value >= max) {
+      maxValueKey = key;
+    }
+  }
+
+  WinnerIndex.value = Object.fromEntries(
+    Object.entries(ChosenQuestion.value?.options).map(
+      ([key, value]): [any, string] => [value, key]
+    )
+  )[maxValueKey];
 };
 // SUB TO CHANNLE AND GET QUESTION
 onBeforeMount(() => {
@@ -93,7 +106,7 @@ onUnmounted(() => {
         <div
           class="rounded-sm flex flex-col z-30 bg-white h-fit w-full p-2 sm:w-4/5 md:w-1/2 lg:w-1/3"
         >
-          <h1 class="py-1 mb-2 text-base font-semibold">
+          <h1 class="py-1 mb-2 font-semibold text-xl">
             {{ ChosenQuestion?.title }}
           </h1>
           <div
@@ -106,6 +119,7 @@ onUnmounted(() => {
               :IsDisabled="Disable"
               :Option="option"
               :key="index"
+              :Winner="WinnerIndex === index"
             />
           </div>
         </div>

@@ -13,14 +13,27 @@ defineProps({
     type: Boolean,
     required: true,
   },
+  Winner: {
+    type: Boolean,
+  },
 });
 </script>
 <template>
   <button
-    class="cursor-pointer disabled:bg-gray-300 disabled:hover:text-black text-start relative transition-all duration-200 whitespace-nowrap flex justify-between text-base font-semibold hover:text-gray-600 text-black w-full h-full rounded-sm border-2 px-2 py-[6px]"
+    :class="[
+      'cursor-pointer disabled:cursor-not-allowed  disabled:hover:text-black text-start relative transition-all duration-200 whitespace-nowrap flex justify-between text-base font-semibold hover:text-gray-600 text-black w-full h-full rounded-sm border-2 px-2 py-[6px]',
+      Winner ? 'bg-green-400 border-green-400' : 'disabled:bg-gray-300',
+    ]"
     :disabled="IsDisabled"
     @click="$emit('onVote', Option)"
   >
+    <span v-if="Winner" class="pr-2">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
+        <path
+          d="M10.15 21.05q-.275.225-.588.012-.312-.212-.187-.562l.725-2.3-1.825-1.3q-.3-.225-.175-.563.125-.337.475-.337H10.8l.7-2.3-3.55-2.1q-.45-.275-.7-.725Q7 10.425 7 9.85V4q0-.825.588-1.413Q8.175 2 9 2h6q.825 0 1.413.587Q17 3.175 17 4v5.85q0 .575-.25 1.025-.25.45-.7.725l-3.55 2.1.7 2.3h2.225q.35 0 .475.337.125.338-.175.563L13.9 18.2l.725 2.3q.125.35-.187.562-.313.213-.588-.012L12 19.65ZM9 4v5.85l2 1.2V4H9Zm6 0h-2v7.05l2-1.2Zm-3 3.825Zm-1-.3Zm2 0Z"
+        />
+      </svg>
+    </span>
     <span class="z-30 w-full h-full">
       {{ Option }}
     </span>
@@ -28,9 +41,7 @@ defineProps({
     <div
       v-if="!IsDisabled"
       :style="`width:${Progress}%;`"
-      :class="[
-        'h-full  absolute z-20  bg-gray-300 transform opacity-50 transition-all duration-200 top-0 left-0',
-      ]"
+      class="h-full absolute z-20 bg-gray-300 transform opacity-50 transition-all duration-200 top-0 left-0"
     ></div>
   </button>
 </template>

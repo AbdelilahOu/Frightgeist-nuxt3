@@ -7,10 +7,7 @@ const { Notification: text } = storeToRefs(NotificationStore);
 
 <template>
   <main
-    :class="[
-      'w-full h-full grid  grid-cols-1 transition-all duration-200',
-      text == '' ? 'grid-rows-[60px_0px_1fr]' : 'grid-rows-[60px_45px_1fr]',
-    ]"
+    class="w-full h-full grid grid-rows-[60px_0px_1fr] grid-cols-1 transition-all duration-200"
   >
     <div class="w-full h-full bg-gray-200 flex items-center justify-center">
       <h1 class="text-primary font-semibold text-lg">
