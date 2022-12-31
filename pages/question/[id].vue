@@ -5,8 +5,10 @@ import { useQuestion } from "~~/stores/QuestionStore";
 import { useUser } from "~~/stores/UserStore";
 
 // variables
+const { timerSecond, timerDate } = useTimer();
 const ProgressObject = ref<{ [key: string]: number }>({});
 const Disable = ref<boolean>(false);
+const ExpiresIn = ref<string>("");
 const Timer = ref();
 // use supabase composable
 const { SubToSingleRow, UnsubFromChannel } = useSupaBase(
@@ -25,6 +27,10 @@ const VoteFor = (choice: string) => {
       user.value?.name
     );
   }
+};
+//
+const TimeHaveEnded = () => {
+  console.log("time ended");
 };
 // SUB TO CHANNLE AND GET QUESTION
 onBeforeMount(() => {
@@ -57,11 +63,12 @@ onMounted(() => {
   Timer.value = setInterval(() => {
     if (ChosenQuestion.value?.endsAt) {
       const { endsAt } = ChosenQuestion.value;
-      if (new Date(endsAt).getTime() - new Date().getTime() <= 0) {
+      const endsSeconds = new Date(endsAt).getTime();
+      ExpiresIn.value = timerDate(endsSeconds);
+      if (timerSecond(endsSeconds)) {
         Disable.value = true;
         clearInterval(Timer.value);
-        const { setQuestionCookie } = useQuestionCookie();
-        setQuestionCookie(0);
+        TimeHaveEnded();
       }
     }
   }, 1000);
@@ -73,7 +80,16 @@ onUnmounted(() => {
 
 <template>
   <div class="text-black h-full w-full">
-    <div class="h-full w-full flex items-center justify-center">
+    <div
+      class="h-full w-full grid grid-cols-1 grid-rows-3 items-center justify-center"
+    >
+      <div
+        class="h-full font-extrabold text-gray-400 text-6xl w-full flex items-center justify-center"
+      >
+        <span>
+          {{ ExpiresIn !== "" ? ExpiresIn : "00h 00m 00s" }}
+        </span>
+      </div>
       <div
         class="rounded-sm z-30 bg-white h-fit w-full p-2 sm:w-4/5 md:w-1/2 lg:w-1/3"
       >
