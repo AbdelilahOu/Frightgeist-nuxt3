@@ -23,7 +23,7 @@ export default (id: number) => {
       .channel("*")
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "Vote" },
+        { event: "*", schema: "public", table: "Vote" },
         handleRowChnage
       )
       .subscribe();

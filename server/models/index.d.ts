@@ -25,4 +25,5 @@ export interface makeVoteType {
   choice: string;
   voterName: string;
   questionId: number;
+  voteId: number;
 }

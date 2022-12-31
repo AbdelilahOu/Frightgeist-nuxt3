@@ -1,5 +1,3 @@
-import useQuestionCookie from "~~/composables/useQuestionCookie";
-
 export default defineNuxtRouteMiddleware((to, from) => {
   const { getQuestionCookie } = useQuestionCookie();
   if (from.name == "question-id" && to.name == "question") {

@@ -119,10 +119,10 @@ onUnmounted(() => {
               v-for="(option, index) in ChosenQuestion?.options"
               @onVote="VoteFor"
               :Progress="ProgressObject[option]"
+              :Winner="WinnerIndex === index"
               :IsDisabled="Disable"
               :Option="option"
               :key="index"
-              :Winner="WinnerIndex === index"
             />
           </div>
         </div>

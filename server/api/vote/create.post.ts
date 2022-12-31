@@ -1,12 +1,17 @@
 import { createVote } from "~~/server/db/vote";
 import { H3Event } from "h3";
 export default defineEventHandler(async (event: H3Event) => {
-  const { choice, voterName, questionId } = await useBody(event);
+  const { choice, voterName, questionId, voteId } = await useBody(event);
   try {
-    const madeAvote = await createVote({ choice, voterName, questionId });
+    const madeAvote = await createVote({
+      questionId,
+      voterName,
+      choice,
+      voteId,
+    });
     if (madeAvote) {
       return {
-        msg: "vote succeded",
+        madeAvote,
       };
     }
     return sendError(

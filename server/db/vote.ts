@@ -2,8 +2,14 @@ import { makeVoteType } from "../models";
 import prisma from "./prisma";
 
 export const createVote = (makeVote: makeVoteType) => {
-  return prisma.vote.create({
-    data: {
+  return prisma.vote.upsert({
+    where: {
+      id: makeVote.voteId,
+    },
+    update: {
+      choice: makeVote.choice,
+    },
+    create: {
       choice: makeVote.choice,
       voter: {
         connect: {
