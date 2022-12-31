@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import useQuestionCookie from "~~/composables/useQuestionCookie";
+import { useNotifications } from "~~/stores/NotificationStore";
 
 export const useQuestion = defineStore("Question", {
   state: (): questionState => {
@@ -55,7 +56,7 @@ export const useQuestion = defineStore("Question", {
         return;
       }
       // Notify
-      console.log("already voted");
+      useNotifications().updateSingle("You have already voted");
     },
   },
 });

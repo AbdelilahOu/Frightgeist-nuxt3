@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import useQuestionCookie from "~~/composables/useQuestionCookie";
 import { useQuestion } from "~~/stores/QuestionStore";
 import { useUser } from "~~/stores/UserStore";
+import { storeToRefs } from "pinia";
 
 // variables
 const { timerSecond, timerDate } = useTimer();
@@ -84,27 +83,31 @@ onUnmounted(() => {
       class="h-full w-full grid grid-cols-1 grid-rows-3 items-center justify-center"
     >
       <div
-        class="h-full font-extrabold text-gray-400 text-6xl w-full flex items-center justify-center"
+        class="h-full font-extrabold text-gray-400 text-5xl sm:text-6xl w-full flex items-center justify-center"
       >
         <span>
           {{ ExpiresIn !== "" ? ExpiresIn : "00h 00m 00s" }}
         </span>
       </div>
-      <div
-        class="rounded-sm z-30 bg-white h-fit w-full p-2 sm:w-4/5 md:w-1/2 lg:w-1/3"
-      >
-        <h1 class="py-1 mb-2 text-base font-semibold">
-          {{ ChosenQuestion?.title }}
-        </h1>
-        <div class="w-full h-full flex gap-2 flex-col">
-          <QuestionOption
-            v-for="(option, index) in ChosenQuestion?.options"
-            @onVote="VoteFor"
-            :Progress="ProgressObject[option]"
-            :IsDisabled="Disable"
-            :Option="option"
-            :key="index"
-          />
+      <div class="flex h-full w-full justify-center items-center">
+        <div
+          class="rounded-sm flex flex-col z-30 bg-white h-fit w-full p-2 sm:w-4/5 md:w-1/2 lg:w-1/3"
+        >
+          <h1 class="py-1 mb-2 text-base font-semibold">
+            {{ ChosenQuestion?.title }}
+          </h1>
+          <div
+            class="w-full h-full items-center justify-center flex gap-2 flex-col"
+          >
+            <QuestionOption
+              v-for="(option, index) in ChosenQuestion?.options"
+              @onVote="VoteFor"
+              :Progress="ProgressObject[option]"
+              :IsDisabled="Disable"
+              :Option="option"
+              :key="index"
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -18,4 +18,4 @@
 
 - [x] reduce picked time to few minutes
 
-- [] dont allow user to create an other question if the theres an active one
+- [x] dont allow user to create an other question if the theres an active one (useCookie)

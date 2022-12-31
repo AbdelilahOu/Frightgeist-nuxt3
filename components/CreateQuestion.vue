@@ -34,6 +34,11 @@ const CreatePollQuestion = async () => {
   if (!AllFilled) {
     return;
   }
+  const { getQuestionCookie } = useQuestionCookie();
+  if (getQuestionCookie()) {
+    useNotifications().updateSingle("you have already create a question");
+    return;
+  }
   const data: any = await useOurFetch("/api/question/create", {
     method: "POST",
     body: {

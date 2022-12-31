@@ -10,6 +10,9 @@ export const useNotifications = defineStore("Notifications", {
   actions: {
     updateSingle: function (newText: string) {
       this.Notification = newText;
+      setTimeout(() => {
+        this.Notification = "";
+      }, 2000);
     },
     deleteQueue: function (id: number) {
       this.Queue.splice(id, 1);
