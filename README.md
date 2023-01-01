@@ -15,6 +15,8 @@
 
 - [ ] The changes are slow (listening on changes send a request for newer data, update store data)
 
+- [ ] Whene a user makes a vote we register the vote in the pinia store so that whene he changes it we only update the last but if he reloaded the page the vote will be gone and if he chnages his vote it adds it as a new vote, we could chnage this by puting it in the cookie but its gone after one minute I could use localStorage but im not a fan really
+
 - [x] duplicate Votes (changed vote.create to vote.upsert)
 
 - [x] Something is wrogn with middlewares i guess
