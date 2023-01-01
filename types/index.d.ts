@@ -10,9 +10,7 @@ export interface question {
 
 export interface voteStats {
   choice: string;
-  _count: {
-    _all: number;
-  };
+  percent: number;
 }
 
 export interface questionState {

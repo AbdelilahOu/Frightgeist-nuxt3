@@ -11,9 +11,10 @@ const Disable = ref<boolean>(false);
 const ExpiresIn = ref<string>("");
 const WinnerIndex = ref<number>();
 const Timer = ref();
-// use supabase composable
-// use question store
+// use  composables
+// use  stores
 const questionStore = useQuestion();
+const { clearVoteId } = useQuestionCookie();
 const { ChosenQuestion, ChosenQuestionVotes } = storeToRefs(questionStore);
 const { SubToSingleRow, UnsubFromChannel } = useSupaBase(questionId);
 const { timerSecond, timerDate } = useTimer();
@@ -30,6 +31,7 @@ const TimeHaveEnded = () => {
   let max = 0;
   for (const [key, value] of Object.entries(ProgressObject.value)) {
     if (value >= max) {
+      max = value;
       maxValueKey = key;
     }
   }
@@ -65,13 +67,8 @@ onMounted(() => {
     () => ChosenQuestionVotes.value,
     (Votes) => {
       if (Votes) {
-        console.log(Votes);
-        const Total = Votes.reduce((acc, vote) => acc + vote._count._all, 0);
         Votes.forEach((vote) => {
-          ProgressObject.value = {};
-          ProgressObject.value[vote.choice] = Math.floor(
-            (vote._count._all / Total) * 100
-          );
+          ProgressObject.value[vote.choice] = vote.percent;
         });
       }
     },
@@ -90,12 +87,14 @@ onMounted(() => {
         Disable.value = true;
         clearInterval(Timer.value);
         TimeHaveEnded();
+        clearVoteId();
       }
     }
   }, 1000);
 });
 onUnmounted(() => {
   clearInterval(Timer.value);
+  clearVoteId();
 });
 </script>
 

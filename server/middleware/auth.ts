@@ -46,6 +46,7 @@ export default defineEventHandler(async (event) => {
       })
     );
   }
+  console.log("server auth middleware is done");
   event.context.auth = decoded;
   return;
 });

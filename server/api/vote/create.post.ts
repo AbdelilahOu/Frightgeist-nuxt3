@@ -19,6 +19,7 @@ export default defineEventHandler(async (event: H3Event) => {
       createError({ statusCode: 401, statusMessage: "sth is wrong" })
     );
   } catch (error) {
+    console.log(error);
     return sendError(
       event,
       createError({ statusCode: 401, statusMessage: "catched err" })

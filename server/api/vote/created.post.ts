@@ -8,6 +8,7 @@ export default defineEventHandler(async (event: H3Event) => {
       vote,
     };
   } catch (error) {
+    console.log(error);
     return sendError(
       event,
       createError({ statusCode: 401, statusMessage: "sth went wrong" })

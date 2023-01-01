@@ -4,7 +4,7 @@ import prisma from "./prisma";
 export const createVote = (makeVote: makeVoteType) => {
   return prisma.vote.upsert({
     where: {
-      id: makeVote.voteId,
+      id: Number(makeVote.voteId),
     },
     update: {
       choice: makeVote.choice,
@@ -55,7 +55,7 @@ export const getAllVotesOfQuestion = (id: number) => {
       _all: true,
     },
     where: {
-      questionId: id,
+      questionId: Number(id),
     },
   });
 };

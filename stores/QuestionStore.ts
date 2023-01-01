@@ -42,7 +42,7 @@ export const useQuestion = defineStore("Question", {
       this.ChosenQuestionVotes = res.votes;
     },
     createVote: async function (choice: string, id: number, voterName: string) {
-      const { setVoteCookie, isAlreaddyVoted } = useQuestionCookie();
+      const { setVoteCookie, isAlreaddyVoted, getVoteId } = useQuestionCookie();
       if (!isAlreaddyVoted(id)) {
         const { timerSecond } = useTimer();
         // theres still time to vote
@@ -62,7 +62,7 @@ export const useQuestion = defineStore("Question", {
               choice,
               voterName,
               questionId: id,
-              voteId: this.MadeVote?.id ?? 0,
+              voteId: this.MadeVote?.id ?? getVoteId() ?? 0,
             },
           });
           if (res) {
