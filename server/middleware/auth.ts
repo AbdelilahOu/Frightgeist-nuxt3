@@ -1,5 +1,4 @@
 import UrlPattern from "url-pattern";
-import { getUserById } from "../db/user";
 import { ValidateToken } from "../utils/jwt";
 
 export default defineEventHandler(async (event) => {
