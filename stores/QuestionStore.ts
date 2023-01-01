@@ -67,7 +67,7 @@ export const useQuestion = defineStore("Question", {
           });
           if (res) {
             this.MadeVote = res.madeAvote;
-            setVoteCookie(id);
+            setVoteCookie(res.madeAvote);
           }
           return;
         }

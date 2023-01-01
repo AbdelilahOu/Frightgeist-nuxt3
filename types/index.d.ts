@@ -19,13 +19,15 @@ export interface questionState {
   Questions: question[] | null;
   ChosenQuestion: question | null;
   ChosenQuestionVotes: voteStats[] | null;
-  MadeVote: {
-    id: number;
-    createdAt: string;
-    choice: string;
-    voterName: string;
-    questionId: number;
-  } | null;
+  MadeVote: Vote | null;
+}
+
+export interface Vote {
+  id: number;
+  createdAt: string;
+  choice: string;
+  voterName: string;
+  questionId: number;
 }
 
 export interface userStore {

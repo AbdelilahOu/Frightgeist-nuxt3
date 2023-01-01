@@ -65,8 +65,10 @@ onMounted(() => {
     () => ChosenQuestionVotes.value,
     (Votes) => {
       if (Votes) {
+        console.log(Votes);
         const Total = Votes.reduce((acc, vote) => acc + vote._count._all, 0);
         Votes.forEach((vote) => {
+          ProgressObject.value = {};
           ProgressObject.value[vote.choice] = Math.floor(
             (vote._count._all / Total) * 100
           );
@@ -100,7 +102,7 @@ onUnmounted(() => {
 <template>
   <div class="text-black h-full w-full">
     <div
-      class="h-full w-full grquestionId grquestionId-cols-1 grquestionId-rows-3 items-center justify-center"
+      class="h-full w-full grid grid-cols-1 grid-rows-3 items-center justify-center"
     >
       <div
         class="h-full font-extrabold text-gray-400 text-5xl sm:text-6xl w-full flex items-center justify-center"

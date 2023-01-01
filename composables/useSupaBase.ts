@@ -15,6 +15,7 @@ export default (id: number) => {
   });
 
   const handleRowChnage = async (payload: any) => {
+    console.log("changed ");
     useQuestion().getChosenQuestionVotes(id);
   };
 
