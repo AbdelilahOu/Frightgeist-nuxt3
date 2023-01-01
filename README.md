@@ -15,8 +15,6 @@
 
 - [ ] The changes are slow (listening on changes send a request for newer data, update store data)
 
-- [ ] Votes are stopped whene the time is over but its done in the front how about we check for endsdate in the backend
-
 - [x] duplicate Votes (changed vote.create to vote.upsert)
 
 - [x] Something is wrogn with middlewares i guess
