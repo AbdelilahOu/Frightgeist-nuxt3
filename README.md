@@ -1,11 +1,19 @@
 # Voting app
 
-## Features :
+## How it works :
 
-- Create question at a time
-- Cant vote more than one time within a minute
-- Show countdown of the question
-- Show winner
+### whene creating a question :
+
+- Create your question give it a time and options...
+- Whene the question is created we navigate to the question/:id page
+- Since you created the question you cant leave until the question time is ended (whats the point of creating a question and just leave it there)
+
+### whene particepating on a question :
+
+- Navigate to the question
+- make a vote
+- you are not allowed to make an other vote till 1 minute later
+- whene voting again the old vote is updated
 
 ## Issues :
 
@@ -15,7 +23,7 @@
 
 - [ ] The changes are slow (listening on changes send a request for newer data, update store data)
 
-- [ ] Whene a user makes a vote we register the vote in the pinia store so that whene he changes it we only update the last but if he reloaded the page the vote will be gone and if he chnages his vote it adds it as a new vote, we could chnage this by puting it in the cookie but its gone after one minute I could use localStorage but im not a fan really
+- [x] Whene a user makes a vote we register the vote in the pinia store so that whene he changes it we only update the last but if he reloaded the page the vote will be gone and if he chnages his vote it adds it as a new vote, we could chnage this by puting it in the cookie but its gone after one minute I could use localStorage but im not a fan really
 
 - [x] duplicate Votes (changed vote.create to vote.upsert)
 
