@@ -3,7 +3,7 @@ import { createUser } from "../../db/user";
 import { H3Event } from "h3";
 export default defineEventHandler(async (event: H3Event) => {
   // get user name, password and email from req.body
-  const { userName: name, passWord, email } = await useBody(event);
+  const { userName: name, passWord, email } = await readBody(event);
   try {
     // generate hashed password
     const salt = await GenerateSalt();

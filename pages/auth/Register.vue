@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useUser } from "~~/stores/UserStore";
 
-useMeta({
+definePageMeta({
   title: "Register",
 });
 // feilds

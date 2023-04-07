@@ -4,7 +4,7 @@ import { getUserData } from "../../db/user";
 import { H3Event } from "h3";
 export default defineEventHandler(async (event) => {
   // get data from req.body
-  const { userName, passWord } = await useBody(event);
+  const { userName, passWord } = await readBody(event);
   try {
     // get user data
     const user = await getUserData(userName);

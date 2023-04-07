@@ -10,7 +10,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/jsonwebtoken": "^8.5.9",
-    "nuxt": "3.0.0-rc.12",
+    "nuxt": "^3.3.2",
     "prisma": "^4.6.1"
   },
   "dependencies": {

@@ -6,7 +6,7 @@ definePageMeta({
   middleware: ["auth-middleware", "question-middleware"],
 });
 // meta data
-useMeta({
+definePageMeta({
   title: "Questions",
 });
 //
